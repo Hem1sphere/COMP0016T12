@@ -9,5 +9,9 @@ class Challenge(models.Model):
     description = models.TextField(default="")
     data = models.FileField(blank=True)
 
+    def get_developers(self):
+        return ",".join([str(d) for d in self.developers.all()])
+
     def __str__(self):
         return f'Challenge: {self.description}'
+
