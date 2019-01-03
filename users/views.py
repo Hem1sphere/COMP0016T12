@@ -10,14 +10,17 @@ from .forms import ClinicianRegisterForm
 from django.contrib.auth.decorators import login_required
 from .decorators import developer_required
 
+
 @login_required
 @developer_required
 def testrestricted(request):
     return HttpResponse('<h1>test restricted views for developer</h1>')
 
+
 @login_required
 def profile(request):
     return render(request, 'users/profile.html')
+
 
 # Create your views here.
 class RegisterView(TemplateView):
