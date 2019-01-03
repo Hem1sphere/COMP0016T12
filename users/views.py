@@ -15,6 +15,9 @@ from .decorators import developer_required
 def testrestricted(request):
     return HttpResponse('<h1>test restricted views for developer</h1>')
 
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
 
 # Create your views here.
 class RegisterView(TemplateView):
