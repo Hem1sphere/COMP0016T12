@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('register/', user_views.RegisterView.as_view(), name='register'),
+    path('testrestricted/', user_views.testrestricted, name='test'),
     path('register/developer/', user_views.DeveloperRegisterView.as_view(), name='developer_register'),
     path('register/clinician/', user_views.ClinicianRegisterView.as_view(), name='clinician_register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),

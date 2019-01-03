@@ -1,9 +1,19 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.views.generic import CreateView, TemplateView
 from django.shortcuts import redirect
 from .models import User
 from .forms import DeveloperRegisterForm
 from .forms import ClinicianRegisterForm
+
+# from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from .decorators import developer_required
+
+@login_required
+@developer_required
+def testrestricted(request):
+    return HttpResponse('<h1>test restricted views for developer</h1>')
 
 
 # Create your views here.
