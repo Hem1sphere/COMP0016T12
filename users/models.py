@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from PIL import Image
 
+# Probably can do without separate models for Developer/Clinician/Admin as the boolean flag seems to suffice.
+# Also, the need for an is_admin is questionable because I see no use case for it,
+# not sure how real companies handle account with admin rights. Need to refactor these later
+
 
 # Create your models here.
 class User(AbstractUser):
