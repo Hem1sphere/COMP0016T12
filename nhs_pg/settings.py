@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'challenges.apps.ChallengesConfig',
     'main.apps.MainConfig',
     'solutions.apps.SolutionsConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,3 +125,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'users.User'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL = 'main-page'
+LOGIN_URL = 'login'
+
+
