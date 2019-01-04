@@ -18,12 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from users import views as user_views
+# from users import views as user_views
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
+    path('challenges/', include('challenges.urls')),
+    path('solutions/', include('solutions.urls')),
     path('register/', user_views.RegisterView.as_view(), name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('testrestricted/', user_views.testrestricted, name='test'),
