@@ -2,13 +2,14 @@ from django.conf.urls import url
 from django.urls import include, path
 from django.contrib import admin
 from django.conf.urls import url, include
-from . import views
 from .views import(
-    ChallengesDetailView,
-    ChallengesMainView
+    ChallengeDetailView,
+    ChallengeMainView,
+    ChallengeCreateView
 )
  
 urlpatterns = [
-    path('', ChallengesMainView.as_view(), name='challenges_main'),
-    path('<int:pk>', ChallengesDetailView.as_view(), name='challenges_detail'),
+    path('', ChallengeMainView.as_view(), name='challenges_main'),
+    path('<int:pk>/', ChallengeDetailView.as_view(), name='challenges_detail'),
+    path('create/', ChallengeCreateView.as_view(), name = 'challenges_create')
 ]
