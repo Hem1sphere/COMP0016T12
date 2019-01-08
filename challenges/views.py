@@ -10,9 +10,16 @@ from django.views.generic import (
     DeleteView
 )
 
+def challenge(request):
+    context = {
+        'challenges': Challenge.objects.all()
+    }
+    return render(request, 'challenges/challenge_list.html', context)
+
 class ChallengesMainView(ListView):
     model = Challenge
-    template_name = 'challenges/challenges_developers_main.html'
+    template_name = 'challenges/challenge_list.html'
+    context_object_name = 'challenges'
 
 class ChallengesDetailView(DetailView):
     model = Challenge

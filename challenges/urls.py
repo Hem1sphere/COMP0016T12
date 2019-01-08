@@ -6,5 +6,5 @@ from . import views
  
 urlpatterns = [
     path('', views.ChallengesMainView.as_view(), name='challenges_main'),
-    path('detail/', views.ChallengesDetailView.as_view(), name='challenges_detail'),
+    path('<int:pk>', views.ChallengesDetailView.as_view(), name='challenges_detail'),
 ]
