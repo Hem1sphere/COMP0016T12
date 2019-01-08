@@ -1,10 +1,18 @@
 from django.shortcuts import render
 
 # Create your views here.
+from .models import Challenge
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 
+class ChallengesMainView(ListView):
+    model = Challenge
+    template_name = 'challenges/challenges_developers_main.html'
 
-def challenges_dev_main(request):
-    return render(request,"challenges/challenges_developers_main.html")
-
-def challenges_dev_detail(request):
-    return render(request,"challenges/challenges_developers_detail.html")
+class ChallengesDetailView(DetailView):
+    model = Challenge
