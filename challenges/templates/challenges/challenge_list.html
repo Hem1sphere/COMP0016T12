@@ -3,7 +3,7 @@
     {% for challenge in challenges %}
         <article class="media content-section">
           <div class="media-body">
-            <h2><a class="article-title" href="{% url 'challenges_detail' challenge.clinician_id %}">{{ challenge.clinician }}</a></h2>
+            <h2><a class="article-title" href="{% url 'challenges_detail' challenge.clinician_id %}">{{ challenge.id }}</a></h2>
             <p class="article-content">{{ challenge.description }}</p>
           </div>
         </article>
