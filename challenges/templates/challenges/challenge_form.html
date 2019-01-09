@@ -3,10 +3,9 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
     {% if user.is_admin or user.is_clinician %}
         <div class="content-section">
-            <form method="post" novalidate>
+            <form enctype="multipart/form-data" method="post" novalidate>
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">Create a new challenge</legend>
