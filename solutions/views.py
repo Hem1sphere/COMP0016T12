@@ -53,6 +53,7 @@ class SolutionUpdateView(UserPassesTestMixin, UpdateView):
 
 class SolutionDeleteView(UserPassesTestMixin, DeleteView):
     model = Solution
+    success_url = '/'
 
     def test_func(self):
         solution = self.get_object()

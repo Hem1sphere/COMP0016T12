@@ -5,23 +5,24 @@
 
 {% block content %}
     <div class="jumbotron">
-  <h1 class="h4">{{ object.title }} for <a href="{% url 'challenges_detail' object.challenge.id %}">{{ object.challenge }}</a> </h1>
-  <p class="lead">Created by {{ object.developer }} on {{ object.date_created|date:"d F, Y" }}</p>
-    {% if object.developer == user.developer %}
-          <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href= "{% url 'solutions_update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'solutions_delete' object.id %}">Delete</a>
-          </div>
+        <h1 class="h4">{{ object.title }} for <a
+                href="{% url 'challenges_detail' object.challenge.id %}">{{ object.challenge }}</a></h1>
+        <p class="lead">Created by <a href="#">{{ object.developer }}</a> on {{ object.date_created|date:"d F, Y" }}</p>
+        {% if object.developer == user.developer %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'solutions_update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'solutions_delete' object.id %}">Delete</a>
+            </div>
         {% endif %}
-  <hr class="my-4">
+        <hr class="my-4">
         {% if object.data.url != null %}
             <a class="btn btn-primary" href="{{ object.solution_data.url }}">Download Data</a>
-    {% endif %}
-  <p>{{ object.description }}</p>
-  <p class="lead">
-      {% if user.is_developer %}
-    <a class="btn btn-primary btn-lg" href="#" role="button">Participate</a>
-      {% endif %}
-  </p>
-</div>
+        {% endif %}
+        <p>{{ object.description }}</p>
+        <p class="lead">
+            {% if user.is_developer %}
+                <a class="btn btn-primary btn-lg" href="#" role="button">Participate</a>
+            {% endif %}
+        </p>
+    </div>
 {% endblock %}

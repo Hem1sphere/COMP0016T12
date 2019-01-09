@@ -1,18 +1,20 @@
 {% extends 'main/base.html' %}
 
 <div class="jumbotron">
-  <p class="lead">
-      {% block content %}
-    {% for solution in solutions %}
+    <p class="lead">
+        {% block content %}
+            {% for solution in solutions %}
 
-        <div class="card text-white bg-primary mb-3" style="max-width: 40rem; padding: 2rem">
-      <div class="card-subtitle">Solution created by {{ solution.developer.user }} on {{ solution.date_created }}</div>
-      <div class="card-body">
-          <h4> <a class="card-title" href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a></h4>
-        <p class="card-text">{{ solution.description }}</p>
-      </div>
-    </div>
-    {% endfor %}
-{% endblock %}
-  </p>
+                <div class="card text-white bg-primary mb-3" style="max-width: 40rem; padding: 2rem">
+                    <div class="card-subtitle">Solution created by {{ solution.developer.user }}
+                        on {{ solution.date_created }}</div>
+                    <div class="card-body">
+                        <h4><a class="card-title"
+                               href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a></h4>
+                <p class="card-text">{{ solution.description }}</p>
+                </div>
+                </div>
+            {% endfor %}
+        {% endblock %}
+</p>
 </div>
