@@ -30,9 +30,6 @@
             <a class="nav-link" href="{% url 'main-page' %}">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'challenges_create' %}">New Challenge</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{% url 'challenges_main' %}">Challenges</a>
           </li>
           <li class="nav-item">
@@ -40,6 +37,9 @@
           </li>
         </ul>
         <div class="navbar-nav">
+        {% if user.is_clinician or user.is_admin %}
+            <a class="btn btn-info" href="{% url 'challenges_create' %}">New Challenge</a>
+        {% endif %}
                     {% if user.is_authenticated %}
                       <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                       <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
