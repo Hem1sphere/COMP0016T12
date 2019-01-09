@@ -1,23 +1,24 @@
 {% extends 'main/base.html' %}
 {% load crispy_forms_tags %}
 
+
+
 {% block content %}
-    <article class="media content-section">
-    <div class="media-body">
-      <div class="article-metadata">
-{#        <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>#}
-        <small class="text-muted">{{ object.date_created|date:"d F, Y" }}</small>
-        {% if object.clinician == user.clinician %}
+    <div class="jumbotron">
+  <h1 class="h4">{{ object.title }}</h1>
+  <p class="lead">{{ object.date_created|date:"d F, Y" }}</p>
+    {% if object.clinician == user.clinician %}
           <div>
-          <h5 class="article-content">You are the creator!</h5>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="#">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
 {#            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>#}
 {#            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>#}
           </div>
         {% endif %}
-      </div>
-      <h2 class="article-title">{{ object.clinician }}</h2>
-      <p class="article-content">{{ object.description }}</p>
-    </div>
-  </article>
-
+  <hr class="my-4">
+  <p>{{ object.description }}</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Participate</a>
+  </p>
+</div>
 {% endblock %}
