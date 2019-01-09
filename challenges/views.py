@@ -34,7 +34,8 @@ class ChallengeCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.clinician = self.request.user.clinician
-        return super().form_valid(form)
+        form.save()
+        return super(ChallengeCreateView, self).form_valid(form)
 
 class ChallengeUpdateView(UserPassesTestMixin, UpdateView):
     model = Challenge
@@ -42,7 +43,7 @@ class ChallengeUpdateView(UserPassesTestMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.clinician = self.request.user.clinician
-        return super().form_valid(form)
+        return super(ChallengeUpdateView, self).form_valid(form)
 
     def test_func(self):
         challenge = self.get_object()

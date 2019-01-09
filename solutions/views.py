@@ -33,7 +33,8 @@ class SolutionCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
-        return super().form_valid(form)
+        form.save()
+        return super(SolutionCreateView, self).form_valid(form)
 
 
 class SolutionUpdateView(UserPassesTestMixin, UpdateView):
@@ -42,7 +43,7 @@ class SolutionUpdateView(UserPassesTestMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
-        return super().form_valid(form)
+        return super(SolutionUpdateView, self).form_valid(form)
 
     def test_func(self):
         solution = self.get_object()
