@@ -3,7 +3,7 @@ from .models import Challenge
 
 
 class ChallengeAdmin(admin.ModelAdmin):
-    list_display = ('description','get_developers')
+    list_display = ('title','get_developers')
 # Register your models here.
 
 
