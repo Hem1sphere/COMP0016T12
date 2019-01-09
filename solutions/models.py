@@ -9,7 +9,7 @@ from django.urls import reverse
 class Solution(models.Model):
     title = models.CharField(max_length=100, default="")
     date_created = models.DateTimeField(default=timezone.now)
-    developer = models.OneToOneField(Developer, on_delete=models.CASCADE)  # person who solved the person
+    developer = models.ForeignKey(Developer, on_delete=models.CASCADE)  # person who solved the person
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)  # challenge the solution is targeting
     description = models.TextField(default="")
     solution_data = models.FileField()

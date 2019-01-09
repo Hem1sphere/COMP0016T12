@@ -1,8 +1,6 @@
 {% extends 'main/base.html' %}
 {% load crispy_forms_tags %}
 
-
-
 {% block content %}
     <div class="jumbotron">
   <h1 class="h4">{{ object.title }}</h1>
@@ -14,11 +12,36 @@
           </div>
         {% endif %}
   <hr class="my-4">
+    {% if object.data.url != null %}
+        <a class="btn btn-primary" href="{{ object.data.url }}">Download Data</a>
+    {% endif %}
   <p>{{ object.description }}</p>
   <p class="lead">
-      {% if user.is_developer %}
+      {% if user.is_developer%}
     <a class="btn btn-primary btn-lg" href="#" role="button">Participate</a>
       {% endif %}
   </p>
+
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">-Solutions-</th>
+    </tr>
+  </thead>
+{#        {% for developer in challenge.developers.all %}#}
+{#          <tbody>#}
+{#            <tr class="table-active">#}
+{#              <th scope="row">{{ developer }}</th>#}
+{#            </tr>#}
+{#          </tbody>#}
+{#        {% endfor %}#}
+        {% for solution in challenge.solution_set.all %}
+          <tbody>
+            <tr class="table-active" >
+                <td> <a href="{% url 'solutions_detail' solution.id %}">{{ solution }}</a> </td>
+            </tr>
+          </tbody>
+        {% endfor %}
+</table>
 </div>
 {% endblock %}
