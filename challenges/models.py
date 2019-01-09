@@ -18,7 +18,7 @@ class Challenge(models.Model):
         return ",".join([str(d) for d in self.developers.all()])
 
     def __str__(self):
-        return f'Challenge: {self.description}'
+        return f'Challenge: {self.title}'
 
     def get_absolute_url(self):
         return reverse('challenges_detail', kwargs={'pk': self.pk})

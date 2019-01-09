@@ -1,5 +1,6 @@
 from django.shortcuts import render
 # Create your views here.
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic import (
     ListView,
     DetailView,
@@ -10,8 +11,11 @@ from django.views.generic import (
 from .models import Solution
 
 
-def solutions_main(request):
-    return render(request, "solutions/solution_submission.html")
+def solution(request):
+    context = {
+        'solutions': Solution.objects.all()
+    }
+    return render(request, 'solutions/solution_list.html', context)
 
 
 class SolutionMainView(ListView):
@@ -20,9 +24,38 @@ class SolutionMainView(ListView):
     context_object_name = 'solutions'
     ordering = ['-date_created']
 
-class ChallengeDetailView(DetailView):
+class SolutionDetailView(DetailView):
     model = Solution
 
 class SolutionCreateView(CreateView):
     model = Solution
-    fields = ['developer', 'challenge', 'submission_data']
+    fields = ['title', 'description', 'challenge', 'solution_data']
+
+    def form_valid(self, form):
+        form.instance.developer = self.request.user.developer
+        return super().form_valid(form)
+
+
+class SolutionUpdateView(UserPassesTestMixin, UpdateView):
+    model = Solution
+    fields = ['title', 'description', 'solution_data']
+
+    def form_valid(self, form):
+        form.instance.developer = self.request.user.developer
+        return super().form_valid(form)
+
+    def test_func(self):
+        solution = self.get_object()
+        if self.request.user.developer == solution.developer:
+            return True
+        return False
+
+
+class SolutionDeleteView(UserPassesTestMixin, DeleteView):
+    model = Solution
+
+    def test_func(self):
+        solution = self.get_object()
+        if self.request.user.developer == solution.developer:
+            return True
+        return False

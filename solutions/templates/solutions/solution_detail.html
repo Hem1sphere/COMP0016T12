@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+    <div class="jumbotron">
+  <h1 class="h4">{{ object.title }}</h1>
+  <p class="lead">{{ object.date_created|date:"d F, Y" }}</p>
+    {% if object.developer == user.developer %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href= "{% url 'solutions_update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'solutions_delete' object.id %}">Delete</a>
+          </div>
+        {% endif %}
+  <hr class="my-4">
+  <p>{{ object.description }}</p>
+  <p class="lead">
+      {% if user.is_developer %}
+    <a class="btn btn-primary btn-lg" href="#" role="button">Participate</a>
+      {% endif %}
+  </p>
+</div>
+{% endblock %}
