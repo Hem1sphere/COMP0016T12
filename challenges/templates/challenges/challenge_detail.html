@@ -4,7 +4,7 @@
 {% block content %}
     <div class="jumbotron">
   <h1 class="h4">{{ object.title }}</h1>
-  <p class="lead">{{ object.date_created|date:"d F, Y" }}</p>
+  <p class="lead">Created by {{ object.clinician }} on {{ object.date_created|date:"d F, Y" }}</p>
     {% if object.clinician == user.clinician %}
           <div>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href= "{% url 'challenges_update' object.id %}">Update</a>
@@ -13,7 +13,7 @@
         {% endif %}
   <hr class="my-4">
     {% if object.data.url != null %}
-        <a class="btn btn-primary" href="{{ object.data.url }}">Download Data</a>
+        <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
     {% endif %}
   <p>{{ object.description }}</p>
   <p class="lead">

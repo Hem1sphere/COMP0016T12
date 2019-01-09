@@ -13,7 +13,7 @@ from django.views.generic import (
     DeleteView
 )
 
-def challenge(request):
+def createChallenge(request):
     context = {
         'challenges': Challenge.objects.all()
     }
@@ -52,6 +52,7 @@ class ChallengeUpdateView(UserPassesTestMixin, UpdateView):
 
 class ChallengeDeleteView(UserPassesTestMixin, DeleteView):
     model = Challenge
+    success_url = '/'
 
     def test_func(self):
         challenge = self.get_object()
