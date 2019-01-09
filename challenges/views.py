@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from .models import Challenge
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 # Create your views here.
 from .models import Challenge
@@ -34,3 +35,26 @@ class ChallengeCreateView(CreateView):
     def form_valid(self, form):
         form.instance.clinician = self.request.user.clinician
         return super().form_valid(form)
+
+class ChallengeUpdateView(UserPassesTestMixin, UpdateView):
+    model = Challenge
+    fields = ['title', 'description', 'data']
+
+    def form_valid(self, form):
+        form.instance.clinician = self.request.user.clinician
+        return super().form_valid(form)
+
+    def test_func(self):
+        challenge = self.get_object()
+        if self.request.user.clinician == challenge.clinician:
+            return True
+        return False
+
+class ChallengeDeleteView(UserPassesTestMixin, DeleteView):
+    model = Challenge
+
+    def test_func(self):
+        challenge = self.get_object()
+        if self.request.user.clinician == challenge.clinician:
+            return True
+        return False
