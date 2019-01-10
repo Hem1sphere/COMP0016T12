@@ -14,7 +14,9 @@
         {% endif %}
         <hr class="my-4">
         {% if object.data.url != null %}
-            <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
+            {% if user.is_admin or user.is_clinician  %}
+                <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
+            {% endif %}
         {% endif %}
         <p>{{ object.description }}</p>
         <p class="lead">

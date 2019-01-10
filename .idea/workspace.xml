@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="219c95d8-5211-4812-ad2f-c674e1a3f1c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/nhs_pg/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/nhs_pg/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="challenge_detail.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="challenge_detail.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+            <state relative-caret-position="255">
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -72,7 +74,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nhs_pg/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="495">
@@ -187,11 +189,11 @@
         <option value="$PROJECT_DIR$/main/urls.py" />
         <option value="$PROJECT_DIR$/users/templates/users/profile.html" />
         <option value="$PROJECT_DIR$/main/templates/main/base.html" />
-        <option value="$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html" />
         <option value="$PROJECT_DIR$/challenges/templates/challenges/challenge_list.html" />
         <option value="$PROJECT_DIR$/solutions/templates/solutions/solution_detail.html" />
         <option value="$PROJECT_DIR$/main/templates/main/Tutorial.html" />
         <option value="$PROJECT_DIR$/nhs_pg/settings.py" />
+        <option value="$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html" />
       </list>
     </option>
   </component>
@@ -411,6 +413,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3285968" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -706,13 +709,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/challenges/templates/challenges/challenge_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -771,6 +767,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="106" selection-start-line="106" selection-end-line="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
         </state>
       </provider>
     </entry>
