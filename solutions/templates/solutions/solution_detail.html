@@ -6,7 +6,7 @@
 {% block content %}
     <div class="jumbotron">
         <h1 class="h4">{{ object.title }} for <a
-                href="{% url 'challenges_detail' object.challenge.id %}">{{ object.challenge }}</a></h1>
+                href="{% url 'challenges_detail' object.challenge.id %}">{{ object.challenge.title }}</a></h1>
         <p class="lead">Created by <a href="#">{{ object.developer }}</a> on {{ object.date_created|date:"d F, Y" }}</p>
         {% if object.developer == user.developer %}
             <div>
@@ -19,10 +19,5 @@
             <a class="btn btn-primary" href="{{ object.solution_data.url }}"download>Download Solution</a>
         {% endif %}
         <p>{{ object.description }}</p>
-        <p class="lead">
-            {% if user.is_developer %}
-                <a class="btn btn-primary btn-lg" href="http://51.140.115.12/hub/user/haixiang/tree" target="_blank" role="button">Check my solution with dataset</a>
-            {% endif %}
-        </p>
     </div>
 {% endblock %}

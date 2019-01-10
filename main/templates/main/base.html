@@ -37,11 +37,11 @@
             <li class="nav-item{% if request.resolver_match.view_name == 'solutions_main' %} active {% endif %}">
                 <a class="nav-link" href="{% url 'solutions_main' %}">Solutions</a>
             </li>
+            <li class="nav-item{% if request.resolver_match.view_name == 'tutorial' %} active {% endif %}">
+                <a class="nav-link" href="{% url 'tutorial' %}">Tutorial</a>
+            </li>
         </ul>
         <ul class="navbar-nav">
-        <li class="nav-item{% if request.resolver_match.view_name == 'tutorial' %} active {% endif %}">
-            <a class="nav-link" href="{% url 'tutorial' %}">Tutorial</a>
-        </li>
             {% if user.is_clinician or user.is_admin %}
                 <a class="btn btn-info" href="{% url 'challenges_create' %}">New Challenge</a>
             {% elif user.is_developer %}
@@ -49,8 +49,8 @@
             {% endif %}
             {% if user.is_authenticated %}
                 <li class="nav-item{% if request.resolver_match.view_name == 'profile' %} active {% endif %}">
-                <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-            </li>
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
             {% else %}
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>

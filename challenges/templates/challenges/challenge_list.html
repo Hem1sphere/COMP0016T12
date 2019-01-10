@@ -7,7 +7,7 @@
     {% for challenge in challenges %}
 
         <div class="card text-white bg-primary mb-3" style="max-width: 40rem; padding: 2rem">
-      <div class="card-subtitle">Challenge created by {{ challenge.clinician.user }} on {{ challenge.date_created }}</div>
+      <div class="card-subtitle">Challenge created by <a href="#">{{ challenge.clinician.user }}</a> on {{ challenge.date_created }}</div>
       <div class="card-body">
           <h4> <a class="card-title" href="{% url 'challenges_detail' challenge.id %}">{{ challenge.title }}</a></h4>
         <p class="card-text">{{ challenge.description }}</p>
