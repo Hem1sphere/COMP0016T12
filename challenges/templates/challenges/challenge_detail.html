@@ -19,7 +19,7 @@
         <p>{{ object.description }}</p>
         <p class="lead">
             {% if user.is_developer %}
-                <a class="btn btn-primary btn-lg" href="#" role="button">Participate</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'solutions_create' %}" role="button">Submit Solution</a>
             {% endif %}
         </p>
 
@@ -39,7 +39,7 @@
             {% for solution in challenge.solution_set.all %}
                 <tbody>
                 <tr class="table-active">
-                    <td><a href="{% url 'solutions_detail' solution.id %}">{{ solution }}</a></td>
+                    <td><a href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="#">{{ solution.developer }}</a> </td>
                 </tr>
                 </tbody>
             {% endfor %}
