@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="col-lg-8 col-md-7 col-sm-6">
+        <h1>Welcome to NHS PG Tutorial, {{ user }}</h1>
+        <p class="lead">Where you can learn Machine Learning and AI</p>
+        <div class="container">
+            <iframe width="960" height="540" style="margin-bottom: 10%"
+                    src="https://www.youtube.com/embed/G7fPB4OHkys"
+                    allowfullscreen="allowfullscreen"
+                    mozallowfullscreen="mozallowfullscreen"
+                    msallowfullscreen="msallowfullscreen"
+                    oallowfullscreen="oallowfullscreen"
+                    webkitallowfullscreen="webkitallowfullscreen">
+            </iframe>
+
+            <iframe width="960" height="540" style="margin-bottom: 10%"
+                    src="https://www.youtube.com/embed/I7NrVwm3apg"
+                    allowfullscreen="allowfullscreen"
+                    mozallowfullscreen="mozallowfullscreen"
+                    msallowfullscreen="msallowfullscreen"
+                    oallowfullscreen="oallowfullscreen"
+                    webkitallowfullscreen="webkitallowfullscreen">
+            </iframe>
+        </div>
+    </div>
+{% endblock %}

@@ -6,8 +6,8 @@
             {% for solution in solutions %}
 
                 <div class="card text-white bg-primary mb-3" style="max-width: 40rem; padding: 2rem">
-                    <div class="card-subtitle">Solution created by {{ solution.developer.user }}
-                        on {{ solution.date_created }}</div>
+                    <div class="card-subtitle">Solution created by <a href="#">{{ solution.developer.user }}</a>
+                        on {{ solution.date_created }} for <a href="{% url 'challenges_detail' solution.challenge.id%}">{{ solution.challenge.title }}</a> </div>
                     <div class="card-body">
                         <h4><a class="card-title"
                                href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a></h4>
