@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form>
+  
+        <div class="form-group row">
+            <label for="inputSolutionTitle" class="col-sm-2 col-form-label">Solution Title</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="input_solution_title" placeholder=" ">
+            </div>
+        </div>
+
+       <div class="mb-3"> 
+            <label for="validationTextarea">Submission Description</label>
+        <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+            <div class="invalid-feedback">
+                Please enter a message in the textarea.
+            </div>
+        </div> 
+    </form>
+
+    <button type="button" class="btn btn-outline-secondary"> Check My with Given Data Set 
+{% endblock %}

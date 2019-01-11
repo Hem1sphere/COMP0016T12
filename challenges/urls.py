@@ -5,5 +5,6 @@ from django.conf.urls import url, include
 from . import views
  
 urlpatterns = [
-    path('', views.challenges_main, name='challenges_main'),
+    path('', views.challenges_dev_main, name='challenges_main'),
+    path('detail/', views.challenges_dev_detail, name='challenges_detail'),
 ]
