@@ -28,6 +28,10 @@
             {% if user.is_developer %}
                 <a class="btn btn-info btn-lg" href="http://51.140.115.12/hub/user/haixiang/tree" target="_blank" role="button">To Jupyter Notebook</a>
                 <a class="btn btn-primary btn-lg" href="{% url 'solutions_create_spec' object.pk %}" role="button">Submit Solution</a>
+                <form action="#" method="get">
+                    <button type="submit" name="subscribe" class="btn btn-primary btn-lg" value="Subscribe">Participate</button>
+                </form>
+
             {% endif %}
         </p>
 
@@ -47,7 +51,12 @@
             {% for solution in challenge.solution_set.all %}
                 <tbody>
                 <tr class="table-active">
-                    <td><a href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="#">{{ solution.developer }}</a> </td>
+                    <td><a href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="
+            {% if user == solution.developer.user %}
+                {% url 'profile'%}
+            {% else %}
+                {% url 'specific_profile' solution.developer %}
+            {% endif %}">{{ solution.developer }}</a> </td>
                 </tr>
                 </tbody>
             {% endfor %}
