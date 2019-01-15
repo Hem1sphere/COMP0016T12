@@ -4,7 +4,12 @@
 {% block content %}
     <div class="jumbotron">
         <h1 class="h4">{{ object.title }}</h1>
-        <p class="lead">Created by <a href="#">{{ object.clinician }}</a> on {{ object.date_created|date:"d F, Y" }}
+        <p class="lead">Created by <a href="
+            {% if user == object.clinician.user %}
+                {% url 'profile'%}
+            {% else %}
+                {% url 'specific_profile' object.clinician %}
+            {% endif %}">{{ object.clinician }}</a> on {{ object.date_created|date:"d F, Y" }}
         </p>
         {% if object.clinician == user.clinician %}
             <div>
