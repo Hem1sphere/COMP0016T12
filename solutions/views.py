@@ -9,6 +9,7 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Solution
+from .models import Challenge
 
 
 def solution(request):
@@ -35,6 +36,16 @@ class SolutionCreateView(CreateView):
         form.instance.developer = self.request.user.developer
         form.save()
         return super(SolutionCreateView, self).form_valid(form)
+
+class SolutionSpecCreateView(CreateView):
+    model = Solution
+    fields = ['title', 'description', 'solution_data']
+
+    def form_valid(self, form):
+        form.instance.developer = self.request.user.developer
+        form.instance.challenge = Challenge.objects.get(pk=self.kwargs['challengepk'])
+        form.save()
+        return super(SolutionSpecCreateView, self).form_valid(form)
 
 
 class SolutionUpdateView(UserPassesTestMixin, UpdateView):

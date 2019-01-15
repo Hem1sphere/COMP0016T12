@@ -36,6 +36,10 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
 
+def specific_profile(request, username):
+    user = User.objects.get(username=username)
+    return render(request, 'users/profile.html', {"user": user})
+
 
 class RegisterView(TemplateView):
     template_name = "users/register.html"

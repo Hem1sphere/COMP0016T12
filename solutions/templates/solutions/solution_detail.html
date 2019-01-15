@@ -7,7 +7,12 @@
     <div class="jumbotron">
         <h1 class="h4">{{ object.title }} for <a
                 href="{% url 'challenges_detail' object.challenge.id %}">{{ object.challenge.title }}</a></h1>
-        <p class="lead">Created by <a href="#">{{ object.developer }}</a> on {{ object.date_created|date:"d F, Y" }}</p>
+        <p class="lead">Created by <a href="
+            {% if user == object.developer.user %}
+                {% url 'profile'%}
+            {% else %}
+                {% url 'specific_profile' object.developer %}
+            {% endif %}">{{ object.developer }}</a> on {{ object.date_created|date:"d F, Y" }}</p>
         {% if object.developer == user.developer %}
             <div>
                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'solutions_update' object.id %}">Update</a>
