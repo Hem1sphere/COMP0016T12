@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from .models import Developer
 from .models import Challenge
 from django.contrib.auth.mixins import UserPassesTestMixin
 
@@ -19,10 +20,9 @@ def createChallenge(request):
     }
     return render(request, 'challenges/challenge_list.html', context)
 
-def participateInChallenge(request, challenge):
-    user = User.objects.get(username=request.user)
-    if (request.GET.get('subscribe')):
-        challenge.developers.add(user)
+def participateInChallenge(request, participationid):
+    user = Developer.objects.get(user=request.user)
+    Challenge.objects.get(pk=participationid).developers.add(user)
     return render(request, 'challenges/challenge_list.html')
 
 class ChallengeMainView(ListView):

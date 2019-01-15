@@ -28,8 +28,8 @@
             {% if user.is_developer %}
                 <a class="btn btn-info btn-lg" href="http://51.140.115.12/hub/user/haixiang/tree" target="_blank" role="button">To Jupyter Notebook</a>
                 <a class="btn btn-primary btn-lg" href="{% url 'solutions_create_spec' object.pk %}" role="button">Submit Solution</a>
-                <form action="#" method="get">
-                    <button type="submit" name="subscribe" class="btn btn-primary btn-lg" value="Subscribe">Participate</button>
+                <form action="#" method="POST">
+                    <a class="btn btn-primary btn-lg" href="{% url 'participate' object.id %}" role="button">Participate</a>
                 </form>
 
             {% endif %}
