@@ -22,7 +22,19 @@ def createChallenge(request):
 
 def participateInChallenge(request, participationid):
     user = Developer.objects.get(user=request.user)
-    Challenge.objects.get(pk=participationid).developers.add(user)
+    if not user_is_participating(Challenge.objects.get(pk=participationid), user):
+        Challenge.objects.get(pk=participationid).developers.add(user)
+    return render(request, 'challenges/challenge_list.html')
+
+def user_is_participating(challengeid, userid):
+    if Challenge.objects.get(pk=challengeid).developers.filter(pk__in = userid):
+        return True
+    else:return False
+
+def leaveChallenge(request, participationid):
+    user = Developer.objects.get(user=request.user)
+    if user_is_participating(Challenge.objects.get(pk=participationid), user):
+        Challenge.objects.filter(pk__in = participationid).delete()
     return render(request, 'challenges/challenge_list.html')
 
 class ChallengeMainView(ListView):
@@ -33,6 +45,7 @@ class ChallengeMainView(ListView):
 
 class ChallengeDetailView(DetailView):
     model = Challenge
+
 
 class ChallengeCreateView(CreateView):
     model = Challenge
