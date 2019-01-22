@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load crispy_forms_tags %}
+{% load template_methods %}
 
 {% block content %}
     <div class="jumbotron">
@@ -29,9 +30,9 @@
                 <a class="btn btn-info btn-lg" href="http://51.140.115.12/hub/user/haixiang/tree" target="_blank" role="button">To Jupyter Notebook</a>
                 <a class="btn btn-primary btn-lg" href="{% url 'solutions_create_spec' object.pk %}" role="button">Submit Solution</a>
                 <form action="#" method="POST">
-                {% if user_is %}
-                
-                {% endif %}
+{#                {% if user_is_in_challenge user  %}#}
+
+{#                {% endif %}#}
                     <a class="btn btn-primary btn-lg" href="{% url 'participate' object.id %}" role="button">Participate</a>
                     <a class="btn btn-primary btn-lg" href="{% url 'leave' object.id %}" role="button">Leave Challenge</a>
                 </form>

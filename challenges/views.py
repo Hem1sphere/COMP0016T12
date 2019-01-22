@@ -20,21 +20,24 @@ def createChallenge(request):
     }
     return render(request, 'challenges/challenge_list.html', context)
 
-def participateInChallenge(request, participationid):
-    user = Developer.objects.get(user=request.user)
-    if not user_is_participating(Challenge.objects.get(pk=participationid), user):
-        Challenge.objects.get(pk=participationid).developers.add(user)
-    return render(request, 'challenges/challenge_list.html')
 
 def user_is_participating(challengeid, userid):
-    if Challenge.objects.get(pk=challengeid).developers.filter(pk__in = userid):
+    if Challenge.objects.get(pk=challengeid).developers.filter(pk = userid).count() > 0:
         return True
     else:return False
 
-def leaveChallenge(request, participationid):
+def participateInChallenge(request, challengeid):
     user = Developer.objects.get(user=request.user)
-    if user_is_participating(Challenge.objects.get(pk=participationid), user):
-        Challenge.objects.filter(pk__in = participationid).delete()
+    if not user_is_participating(challengeid, user.pk):
+        Challenge.objects.get(pk=challengeid).developers.add(user)
+        # return render(request, 'challenges/challenge_list.html')
+    return render(request, 'challenges/challenge_list.html')
+
+def leaveChallenge(request, challengeid):
+    user = Developer.objects.get(user=request.user)
+    if user_is_participating(challengeid, user.pk):
+        Challenge.objects.get(pk = challengeid).developers.remove(user)
+        # return render(request, 'challenges/challenge_list.html')
     return render(request, 'challenges/challenge_list.html')
 
 class ChallengeMainView(ListView):
