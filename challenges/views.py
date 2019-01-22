@@ -22,6 +22,7 @@ def createChallenge(request):
 
 
 def user_is_participating(challengeid, userid):
+    print(Challenge.objects.get(pk=challengeid).developers)
     if Challenge.objects.get(pk=challengeid).developers.filter(pk = userid).count() > 0:
         return True
     else:return False
