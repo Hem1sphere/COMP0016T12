@@ -1,10 +1,15 @@
 from django import template
 from challenges.models import Challenge
+from users.models import User
+from users.models import Developer
 
 register = template.Library()
 
 @register.simple_tag()
 def user_is_in_challenge(challengeid, userid):
-    if Challenge.objects.get(pk=challengeid).developers.filter(pk = userid).count() > 0:
-        return True
-    else:return False
+
+    current_challenge = Challenge.objects.get(pk=challengeid)
+    for devs in current_challenge.developers.all():
+        if devs.pk == userid:
+            return True
+    return False

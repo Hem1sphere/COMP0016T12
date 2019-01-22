@@ -27,15 +27,12 @@
     <p>{{ object.description }}</p>
     <p class="lead">
         {% if user.is_developer %}
-
-
-        <a class="btn btn-info btn-lg" href="http://51.140.115.12/hub/user/haixiang/tree" target="_blank" role="button">To Jupyter Notebook</a>
-        <a class="btn btn-primary btn-lg" href="{% url 'solutions_create_spec' object.pk %}" role="button">Submit Solution</a>
     <form action="#" method="POST">
-        {% user_is_in_challenge object.pk user.pk as userParticipation %}
-        {{ userParticipation }}
+        {% user_is_in_challenge object.pk user.developer.pk as userParticipation %}
         {% if userParticipation %}
-        <a class="btn btn-primary btn-lg" href="{% url 'leave' object.id %}" role="button">Leave Challenge</a>
+            <a class="btn btn-info btn-lg" href="http://51.140.115.12/hub/user/haixiang/tree" target="_blank" role="button">To Jupyter Notebook</a>
+            <a class="btn btn-primary btn-lg" href="{% url 'solutions_create_spec' object.pk %}" role="button">Submit Solution</a>
+            <a class="btn btn-danger btn-lg" href="{% url 'leave' object.id %}" role="button">Leave Challenge</a>
         {% else %}
         <a class="btn btn-primary btn-lg" href="{% url 'participate' object.id %}" role="button">Participate</a>
             {% endif %}
