@@ -1,7 +1,10 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from .models import Developer
 from .models import Challenge
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.urls import reverse
 
 # Create your views here.
 from .models import Challenge
@@ -19,6 +22,28 @@ def createChallenge(request):
     }
     return render(request, 'challenges/challenge_list.html', context)
 
+
+def user_is_participating(challengeid, userid):
+    current_challenge = Challenge.objects.get(pk=challengeid)
+    for devs in current_challenge.developers.all():
+        if devs.pk == userid:
+            return True
+    return False
+
+def participateInChallenge(request, challengeid):
+    user = Developer.objects.get(user=request.user)
+    if not user_is_participating(challengeid, user.pk):
+        Challenge.objects.get(pk=challengeid).developers.add(user)
+        # return render(request, 'challenges/challenge_list.html')
+    return HttpResponseRedirect(reverse('challenges_detail', args=[challengeid]))
+
+def leaveChallenge(request, challengeid):
+    user = Developer.objects.get(user=request.user)
+    if user_is_participating(challengeid, user.pk):
+        Challenge.objects.get(pk = challengeid).developers.remove(user)
+        # return render(request, 'challenges/challenge_list.html')
+    return HttpResponseRedirect(reverse('challenges_detail', args=[challengeid]))
+
 class ChallengeMainView(ListView):
     model = Challenge
     template_name = 'challenges/challenge_list.html'
@@ -27,6 +52,7 @@ class ChallengeMainView(ListView):
 
 class ChallengeDetailView(DetailView):
     model = Challenge
+
 
 class ChallengeCreateView(CreateView):
     model = Challenge
