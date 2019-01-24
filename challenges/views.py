@@ -37,6 +37,7 @@ def participateInChallenge(request, challengeid):
         # return render(request, 'challenges/challenge_list.html')
     return HttpResponseRedirect(reverse('challenges_detail', args=[challengeid]))
 
+
 def leaveChallenge(request, challengeid):
     user = Developer.objects.get(user=request.user)
     if user_is_participating(challengeid, user.pk):
@@ -44,11 +45,13 @@ def leaveChallenge(request, challengeid):
         # return render(request, 'challenges/challenge_list.html')
     return HttpResponseRedirect(reverse('challenges_detail', args=[challengeid]))
 
+
 class ChallengeMainView(ListView):
     model = Challenge
     template_name = 'challenges/challenge_list.html'
     context_object_name = 'challenges'
     ordering = ['-date_created']
+
 
 class ChallengeDetailView(DetailView):
     model = Challenge
@@ -62,6 +65,7 @@ class ChallengeCreateView(CreateView):
         form.instance.clinician = self.request.user.clinician
         form.save()
         return super(ChallengeCreateView, self).form_valid(form)
+
 
 class ChallengeUpdateView(UserPassesTestMixin, UpdateView):
     model = Challenge

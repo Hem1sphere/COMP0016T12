@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import CreateView, TemplateView
 from django.shortcuts import redirect
 from django.contrib import messages
+from challenges.models import Challenge
 from .models import User
 from .forms import DeveloperRegisterForm, ClinicianRegisterForm, UserUpdateForm, ProfileUpdateForm
 
@@ -30,9 +31,14 @@ def profile(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
+    if request.user.is_developer:
+        interests = request.user.developer.challenge_set.all()
+    else: #user is clincian
+        interests = Challenge.objects.filter(clinician=request.user.clinician)
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'interests': interests,
     }
     return render(request, 'users/profile.html', context)
 
