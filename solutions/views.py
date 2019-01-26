@@ -10,6 +10,8 @@ from django.views.generic import (
 )
 from .models import Solution
 from .models import Challenge
+from challenges.templatetags import template_methods
+from django.http import HttpResponse
 
 
 def solution(request):
@@ -44,8 +46,10 @@ class SolutionSpecCreateView(CreateView):
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
         form.instance.challenge = Challenge.objects.get(pk=self.kwargs['challengepk'])
-        form.save()
-        return super(SolutionSpecCreateView, self).form_valid(form)
+        if template_methods.user_is_in_challenge(self.kwargs['challengepk'], self.request.user.developer.id):
+            form.save()
+            return super(SolutionSpecCreateView, self).form_valid(form)
+        else: return HttpResponse('<h1>You have not yet participated in that challenge</h1>')
 
 
 class SolutionUpdateView(UserPassesTestMixin, UpdateView):
