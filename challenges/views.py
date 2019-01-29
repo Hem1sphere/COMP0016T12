@@ -59,7 +59,7 @@ class ChallengeDetailView(DetailView):
 
 class ChallengeCreateView(CreateView):
     model = Challenge
-    fields = ['title', 'description', 'data']
+    fields = ['title',  'award', 'description', 'data']
 
     def form_valid(self, form):
         form.instance.clinician = self.request.user.clinician
