@@ -3,6 +3,9 @@
 {% load template_methods %}
 
 {% block content %}
+    <div class="alert alert-info">
+        <div class="h5">Prize Money: £{{ object.award }}</div>
+    </div>
     {% if user.is_developer %}
         {% user_is_in_challenge object.pk user.developer.pk as userParticipation %}
         <form action="#" method="POST" style="float: right">
@@ -30,8 +33,52 @@
            role="button">Submit Solution</a>
     {% endif %}
 
-    <p>{{ object.description }}</p>
-    <div class="h5">Prize Money: £{{ object.award }}</div>
+    <div class="container" style="margin-top: 2rem; padding-left: 0;">
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a data-toggle="tab" class="nav-link show active" href="#home">Overview</a></li>
+            <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#description">Description</a></li>
+            <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#evaluation">Evaluation</a></li>
+            <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#timeline">Timeline</a></li>
+            <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#solutions">Solutions</a></li>
+        </ul>
+
+        <div id="challengeTabContent" class="tab-content" style="padding-top: 1rem">
+            <div id="home" class="tab-pane fade show active">
+                <h3>To be added</h3>
+
+            </div>
+            <div id="description" class="tab-pane fade">
+                {{ object.description }}
+
+            </div>
+            <div id="evaluation" class="tab-pane fade">
+                <h3>To be added</h3>
+
+            </div>
+            <div id="timeline" class="tab-pane fade">
+                <h3>To be added</h3>
+
+            </div>
+            <div id="solutions" class="tab-pane fade">
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        {% for solution in challenge.solution_set.all %}
+                            <li class="list-group-item"><a
+                                    href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a
+                                    href="
+                    {% if user == solution.developer.user %}
+                        {% url 'profile' %}
+                    {% else %}
+                        {% url 'specific_profile' solution.developer %}
+                    {% endif %}">{{ solution.developer }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     {% if object.clinician == user.clinician %}
         <div>
@@ -76,7 +123,7 @@
     <hr class="my-4">
 
     <div class="card">
-        <div class="card-header">Attempted Solutions</div>
+        <div class="card-header">Recent Solutions</div>
 
         <ul class="list-group list-group-flush">
             {% for solution in challenge.solution_set.all %}
@@ -95,5 +142,5 @@
     {#        </table>#}
 
 
-    </div>
+    {#    </div>#}
 {% endblock %}
