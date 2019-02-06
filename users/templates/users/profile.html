@@ -52,27 +52,6 @@
                 {{ p_form|crispy }}
             </fieldset>
 
-{#            {% if user.is_developer %}#}
-{#                <p>Challenges I Participated In</p>#}
-{#                <ul>#}
-{#                    {% for interest in interests %}#}
-{#                        <li><a href="{% url 'challenges_detail' interest.id %}">{{ interest.title }}</a></li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#            {% endif %}#}
-
-
-
-
-{#            {% if user.is_clinician %}#}
-{#                <p>Challenges I Created</p>#}
-{#                <ul>#}
-{#                    {% for interest in interests %}#}
-{#                        <li><a href="{% url 'challenges_detail' interest.id %}">{{ interest.title }}</a></li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#            {% endif %}#}
-
 
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Update</button>
