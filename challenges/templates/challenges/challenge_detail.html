@@ -46,20 +46,25 @@
         <div id="challengeTabContent" class="tab-content" style="padding-top: 1rem">
             <div id="home" class="tab-pane fade show active">
                 <h3>To be added</h3>
-
+                {% if object.data.url != null %}
+                    {% if user.is_admin or user.is_clinician %}
+                        <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
+                    {% endif %}
+                {% endif %}
             </div>
+
             <div id="description" class="tab-pane fade">
                 {{ object.description }}
-
             </div>
+
             <div id="evaluation" class="tab-pane fade">
                 <h3>To be added</h3>
-
             </div>
+
             <div id="timeline" class="tab-pane fade">
                 <h3>To be added</h3>
-
             </div>
+
             <div id="solutions" class="tab-pane fade">
                 <div class="card">
                     <ul class="list-group list-group-flush">
@@ -87,11 +92,7 @@
         </div>
     {% endif %}
 
-    {% if object.data.url != null %}
-        {% if user.is_admin or user.is_clinician %}
-            <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
-        {% endif %}
-    {% endif %}
+
 
 
 
