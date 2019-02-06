@@ -10773,3 +10773,12 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 .modal .close:not(:disabled):not(.disabled):hover, .modal .close:not(:disabled):not(.disabled):focus {
   color: #000;
 }
+
+.btn-xlarge {
+    padding: 10px 28px;
+    font-size: 25px; /*change this to alter button size */
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+}

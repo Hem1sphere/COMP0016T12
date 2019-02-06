@@ -1,8 +1,12 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-    <h2>Sign up for a free account</h2>
-    <p class="lead">Select below the type of account you want to create:</p>
-    <a href="{% url 'clinician_register' %}" class="btn btn-outline-info btn-lg" role="button">Clinician</a>
-    <a href="{% url 'developer_register' %}" class="btn btn-outline-info btn-lg" role="button">Developer</a>
+    <div class="col-md-8 offset-md-2">
+        <h2 class="text-center">Sign up for a free account</h2>
+        <p class="lead text-center">Select below the type of account you want to create:</p>
+        <div class="text-center">
+            <a href="{% url 'clinician_register' %}" class="btn btn-outline-info btn-xlarge" role="button">Clinician</a>
+            <a href="{% url 'developer_register' %}" class="btn btn-outline-info btn-xlarge" role="button">Developer</a>
+        </div>
+    </div>
 {% endblock %}
