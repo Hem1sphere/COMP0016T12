@@ -42,9 +42,14 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
 
+
 def specific_profile(request, username):
     user = User.objects.get(username=username)
-    return render(request, 'users/profile.html', {"user": user})
+    if user.is_developer:
+        interests = user.developer.challenge_set.all()
+    else: #user is clincian
+        interests = Challenge.objects.filter(clinician=user.clinician)
+    return render(request, 'users/profile.html', {"user": user, "interests": interests})
 
 
 class RegisterView(TemplateView):
