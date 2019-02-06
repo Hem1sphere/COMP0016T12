@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="219c95d8-5211-4812-ad2f-c674e1a3f1c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,7 +16,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="solution_detail.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="solution_detail.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solutions/templates/solutions/solution_detail.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
@@ -26,11 +25,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="challenge_detail.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="challenge_detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="51" column="31" lean-forward="true" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+            <state relative-caret-position="328">
+              <caret line="53" column="18" lean-forward="true" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
               <folding>
                 <element signature="e#263#283#0#HTML" expanded="true" />
                 <element signature="e#1400#1436#0#HTML" expanded="true" />
@@ -195,7 +194,6 @@
         <option value="$PROJECT_DIR$/main/urls.py" />
         <option value="$PROJECT_DIR$/main/templates/main/Tutorial.html" />
         <option value="$PROJECT_DIR$/nhs_pg/settings.py" />
-        <option value="$PROJECT_DIR$/solutions/templates/solutions/solution_detail.html" />
         <option value="$PROJECT_DIR$/solutions/urls.py" />
         <option value="$PROJECT_DIR$/nhs_pg/urls.py" />
         <option value="$PROJECT_DIR$/../../../scrape.py" />
@@ -213,6 +211,7 @@
         <option value="$PROJECT_DIR$/users/templates/users/profile.html" />
         <option value="$PROJECT_DIR$/users/views.py" />
         <option value="$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html" />
+        <option value="$PROJECT_DIR$/solutions/templates/solutions/solution_detail.html" />
       </list>
     </option>
   </component>
@@ -881,22 +880,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/solutions/templates/solutions/solution_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="98" lean-forward="true" selection-start-line="14" selection-start-column="98" selection-end-line="14" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/challenges/templates/challenges/challenge_detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="51" column="31" lean-forward="true" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+        <state relative-caret-position="328">
+          <caret line="53" column="18" lean-forward="true" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="18" />
           <folding>
             <element signature="e#263#283#0#HTML" expanded="true" />
             <element signature="e#1400#1436#0#HTML" expanded="true" />
             <element signature="e#1895#1920#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/solutions/templates/solutions/solution_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="98" lean-forward="true" selection-start-line="14" selection-start-column="98" selection-end-line="14" selection-end-column="98" />
         </state>
       </provider>
     </entry>

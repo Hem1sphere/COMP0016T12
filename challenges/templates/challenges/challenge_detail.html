@@ -36,7 +36,7 @@
     <div class="container" style="margin-top: 2rem; padding-left: 0;">
 
         <ul class="nav nav-tabs">
-            <li class="nav-item"><a data-toggle="tab" class="nav-link show active" href="#home">Overview</a></li>
+            <li class="nav-item"><a data-toggle="tab" class="nav-link show active" href="#overview">Overview</a></li>
             <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#description">Description</a></li>
             <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#evaluation">Evaluation</a></li>
             <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#timeline">Timeline</a></li>
@@ -44,7 +44,7 @@
         </ul>
 
         <div id="challengeTabContent" class="tab-content" style="padding-top: 1rem">
-            <div id="home" class="tab-pane fade show active">
+            <div id="overview" class="tab-pane fade show active">
                 <h3>To be added</h3>
                 {% if object.data.url != null %}
                     {% if user.is_admin or user.is_clinician %}
