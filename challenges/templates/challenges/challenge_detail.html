@@ -13,10 +13,10 @@
             {% endif %}">{{ object.clinician }}</a> on {{ object.date_created|date:"d F, Y" }}
     </p>
 
-    <hr class="my-4">
 
-    <div class="h5">Award: £{{ object.award }}</div>
+
     <p>{{ object.description }}</p>
+    <div class="h5">Prize Money: £{{ object.award }}</div>
 
     {% if object.clinician == user.clinician %}
         <div>
@@ -48,12 +48,13 @@
     {% endif %}
     </p>
 
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">-Solutions-</th>
-        </tr>
-        </thead>
+
+{#    <table class="table table-hover">#}
+{#        <thead>#}
+{#        <tr>#}
+{#            <th scope="col">-Solutions-</th>#}
+{#        </tr>#}
+{#        </thead>#}
         {#        {% for developer in challenge.developers.all %}#}
         {#          <tbody>#}
         {#            <tr class="table-active">#}
@@ -61,18 +62,40 @@
         {#            </tr>#}
         {#          </tbody>#}
         {#        {% endfor %}#}
-        {% for solution in challenge.solution_set.all %}
-            <tbody>
-            <tr class="table-active">
-                <td><a href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="
-            {% if user == solution.developer.user %}
-                {% url 'profile'%}
-            {% else %}
-                {% url 'specific_profile' solution.developer %}
-            {% endif %}">{{ solution.developer }}</a> </td>
-            </tr>
-            </tbody>
-        {% endfor %}
+{#        {% for solution in challenge.solution_set.all %}#}
+{#            <tbody>#}
+{#            <tr class="table-active">#}
+{#                <td><a href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="#}
+{#            {% if user == solution.developer.user %}#}
+{#                {% url 'profile'%}#}
+{#            {% else %}#}
+{#                {% url 'specific_profile' solution.developer %}#}
+{#            {% endif %}">{{ solution.developer }}</a> </td>#}
+{#            </tr>#}
+{#            </tbody>#}
+
+        <hr class="my-4">
+
+        <div class="card">
+            <div class="card-header">Attempted Solutions</div>
+
+            <ul class="list-group list-group-flush">
+                {% for solution in challenge.solution_set.all %}
+                    <li class="list-group-item"><a
+                            href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="
+                    {% if user == solution.developer.user %}
+                        {% url 'profile' %}
+                    {% else %}
+                        {% url 'specific_profile' solution.developer %}
+                    {% endif %}">{{ solution.developer }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+{#        {% endfor %}#}
     </table>
+
+
+
 </div>
 {% endblock %}

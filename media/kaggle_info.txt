@@ -1,0 +1,16 @@
+
+
+WHAT
+An online platform offering machine learning competitions and now also offers a public data platform, a cloud-based workbench for data science, and short form AI education
+
+WHEN
+Founded in 2010 
+
+WHO
+Founded by Anthony Goldbloom when he was interning at The Economist and told to write an article on Big Data and has been bought over by Google in 2017
+
+WHERE
+Kaggle's headquarters are found in San Francisco, California (Silicon Valley)
+
+WHY 
+
