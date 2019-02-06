@@ -9,7 +9,7 @@
                 href="{% url 'challenges_detail' object.challenge.id %}">{{ object.challenge.title }}</a></h1>
         <p class="lead">Created by <a href="
             {% if user == object.developer.user %}
-                {% url 'profile'%}
+                {% url 'profile' %}
             {% else %}
                 {% url 'specific_profile' object.developer %}
             {% endif %}">{{ object.developer }}</a> on {{ object.date_created|date:"d F, Y" }}</p>
@@ -21,7 +21,7 @@
         {% endif %}
         <hr class="my-4">
         {% if object.solution_data.url != null %}
-            <a class="btn btn-primary" href="{{ object.solution_data.url }}"download>Download Solution</a>
+            <a class="btn btn-primary" href="{{ object.solution_data.url }}" download>Download Solution</a>
         {% endif %}
         <p>{{ object.description }}</p>
     </div>
