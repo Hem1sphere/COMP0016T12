@@ -20,9 +20,11 @@
             </div>
         {% endif %}
         <hr class="my-4">
+
+        <p>{{ object.description }}</p>
+
         {% if object.solution_data.url != null %}
             <a class="btn btn-primary" href="{{ object.solution_data.url }}" download>Download Solution</a>
         {% endif %}
-        <p>{{ object.description }}</p>
     </div>
 {% endblock %}
