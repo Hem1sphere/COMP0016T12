@@ -12,20 +12,25 @@
                 {% url 'specific_profile' object.clinician %}
             {% endif %}">{{ object.clinician }}</a> on {{ object.date_created|date:"d F, Y" }}
     </p>
+
+    <hr class="my-4">
+
+    <div class="h5">Award: £{{ object.award }}</div>
+    <p>{{ object.description }}</p>
+
     {% if object.clinician == user.clinician %}
         <div>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'challenges_update' object.id %}">Update</a>
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'challenges_delete' object.id %}">Delete</a>
         </div>
     {% endif %}
-    <hr class="my-4">
+
     {% if object.data.url != null %}
         {% if user.is_admin or user.is_clinician  %}
             <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
         {% endif %}
     {% endif %}
-    <div class="h5">Award: £{{ object.award }}</div>
-    <p>{{ object.description }}</p>
+
     <p class="lead">
         {% if user.is_developer %}
     <form action="#" method="POST">
