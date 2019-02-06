@@ -3,17 +3,32 @@
 {% load template_methods %}
 
 {% block content %}
-<div class="jumbotron">
+    {% if user.is_developer %}
+        {% user_is_in_challenge object.pk user.developer.pk as userParticipation %}
+        <form action="#" method="POST" style="float: right">
+            {% if userParticipation %}
+                <a class="btn btn-danger btn-lg" href="{% url 'leave' object.id %}" role="button">Leave
+                    Challenge</a>
+            {% else %}
+                <a class="btn btn-primary btn-lg" href="{% url 'participate' object.id %}" role="button">Participate</a>
+            {% endif %}
+        </form>
+    {% endif %}
     <h1 class="h4">{{ object.title }}</h1>
     <p class="lead">Created by <a href="
             {% if user == object.clinician.user %}
-                {% url 'profile'%}
+                {% url 'profile' %}
             {% else %}
                 {% url 'specific_profile' object.clinician %}
             {% endif %}">{{ object.clinician }}</a> on {{ object.date_created|date:"d F, Y" }}
     </p>
-
-
+    {% if userParticipation %}
+        <a class="btn btn-info btn-lg" href="http://51.140.115.12/hub/user/haixiang/lab"
+           target="_blank"
+           role="button">To Jupyter Notebook</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'solutions_create_spec' object.pk %}"
+           role="button">Submit Solution</a>
+    {% endif %}
 
     <p>{{ object.description }}</p>
     <div class="h5">Prize Money: £{{ object.award }}</div>
@@ -26,76 +41,59 @@
     {% endif %}
 
     {% if object.data.url != null %}
-        {% if user.is_admin or user.is_clinician  %}
+        {% if user.is_admin or user.is_clinician %}
             <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
         {% endif %}
     {% endif %}
 
-    <p class="lead">
-        {% if user.is_developer %}
-    <form action="#" method="POST">
-        {% user_is_in_challenge object.pk user.developer.pk as userParticipation %}
-        {% if userParticipation %}
-            <a class="btn btn-info btn-lg" href="http://51.140.115.12/hub/user/haixiang/lab" target="_blank" role="button">To Jupyter Notebook</a>
-            <a class="btn btn-primary btn-lg" href="{% url 'solutions_create_spec' object.pk %}" role="button">Submit Solution</a>
-            <a class="btn btn-danger btn-lg" href="{% url 'leave' object.id %}" role="button">Leave Challenge</a>
-        {% else %}
-        <a class="btn btn-primary btn-lg" href="{% url 'participate' object.id %}" role="button">Participate</a>
-            {% endif %}
-    </form>
 
 
-    {% endif %}
-    </p>
+    {#    <table class="table table-hover">#}
+    {#        <thead>#}
+    {#        <tr>#}
+    {#            <th scope="col">-Solutions-</th>#}
+    {#        </tr>#}
+    {#        </thead>#}
+    {#        {% for developer in challenge.developers.all %}#}
+    {#          <tbody>#}
+    {#            <tr class="table-active">#}
+    {#              <th scope="row">{{ developer }}</th>#}
+    {#            </tr>#}
+    {#          </tbody>#}
+    {#        {% endfor %}#}
+    {#        {% for solution in challenge.solution_set.all %}#}
+    {#            <tbody>#}
+    {#            <tr class="table-active">#}
+    {#                <td><a href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="#}
+    {#            {% if user == solution.developer.user %}#}
+    {#                {% url 'profile'%}#}
+    {#            {% else %}#}
+    {#                {% url 'specific_profile' solution.developer %}#}
+    {#            {% endif %}">{{ solution.developer }}</a> </td>#}
+    {#            </tr>#}
+    {#            </tbody>#}
 
+    <hr class="my-4">
 
-{#    <table class="table table-hover">#}
-{#        <thead>#}
-{#        <tr>#}
-{#            <th scope="col">-Solutions-</th>#}
-{#        </tr>#}
-{#        </thead>#}
-        {#        {% for developer in challenge.developers.all %}#}
-        {#          <tbody>#}
-        {#            <tr class="table-active">#}
-        {#              <th scope="row">{{ developer }}</th>#}
-        {#            </tr>#}
-        {#          </tbody>#}
-        {#        {% endfor %}#}
-{#        {% for solution in challenge.solution_set.all %}#}
-{#            <tbody>#}
-{#            <tr class="table-active">#}
-{#                <td><a href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="#}
-{#            {% if user == solution.developer.user %}#}
-{#                {% url 'profile'%}#}
-{#            {% else %}#}
-{#                {% url 'specific_profile' solution.developer %}#}
-{#            {% endif %}">{{ solution.developer }}</a> </td>#}
-{#            </tr>#}
-{#            </tbody>#}
+    <div class="card">
+        <div class="card-header">Attempted Solutions</div>
 
-        <hr class="my-4">
-
-        <div class="card">
-            <div class="card-header">Attempted Solutions</div>
-
-            <ul class="list-group list-group-flush">
-                {% for solution in challenge.solution_set.all %}
-                    <li class="list-group-item"><a
-                            href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="
+        <ul class="list-group list-group-flush">
+            {% for solution in challenge.solution_set.all %}
+                <li class="list-group-item"><a
+                        href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="
                     {% if user == solution.developer.user %}
                         {% url 'profile' %}
                     {% else %}
                         {% url 'specific_profile' solution.developer %}
                     {% endif %}">{{ solution.developer }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
+            {% endfor %}
+        </ul>
+    </div>
 
-{#        {% endfor %}#}
-    </table>
+    {#        {% endfor %}#}
+    {#        </table>#}
 
 
-
-</div>
+    </div>
 {% endblock %}
