@@ -119,7 +119,7 @@
 
     <div>
         {% if userParticipation %}
-            <a class="btn btn-info btn-lg" href="http://51.140.115.12/hub/user/haixiang/lab"
+            <a class="btn btn-info btn-lg" href="http://51.140.115.12/hub/user/{{ user.username }}/lab"
                target="_blank"
                role="button">To Jupyter Notebook</a>
             <a class="btn btn-primary btn-lg" href="{% url 'solutions_create_spec' object.pk %}"
