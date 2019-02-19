@@ -88,33 +88,6 @@
 
 
 
-
-
-    {#    <table class="table table-hover">#}
-    {#        <thead>#}
-    {#        <tr>#}
-    {#            <th scope="col">-Solutions-</th>#}
-    {#        </tr>#}
-    {#        </thead>#}
-    {#        {% for developer in challenge.developers.all %}#}
-    {#          <tbody>#}
-    {#            <tr class="table-active">#}
-    {#              <th scope="row">{{ developer }}</th>#}
-    {#            </tr>#}
-    {#          </tbody>#}
-    {#        {% endfor %}#}
-    {#        {% for solution in challenge.solution_set.all %}#}
-    {#            <tbody>#}
-    {#            <tr class="table-active">#}
-    {#                <td><a href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a> by <a href="#}
-    {#            {% if user == solution.developer.user %}#}
-    {#                {% url 'profile'%}#}
-    {#            {% else %}#}
-    {#                {% url 'specific_profile' solution.developer %}#}
-    {#            {% endif %}">{{ solution.developer }}</a> </td>#}
-    {#            </tr>#}
-    {#            </tbody>#}
-
     <hr class="my-4">
 
     <div>

@@ -19,6 +19,9 @@
                 <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'solutions_delete' object.id %}">Delete</a>
             </div>
         {% endif %}
+        {% if object.challenge.clinician == user.clinician %}
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'solutions_evaluate' object.id %}">Evaluate</a>
+        {% endif %}
         <hr class="my-4">
 
         <p>{{ object.description }}</p>

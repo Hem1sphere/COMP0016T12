@@ -28,8 +28,10 @@ class SolutionMainView(ListView):
     context_object_name = 'solutions'
     ordering = ['-date_created']
 
+
 class SolutionDetailView(DetailView):
     model = Solution
+
 
 class SolutionForm(forms.ModelForm):
     class Meta:
@@ -40,6 +42,19 @@ class SolutionForm(forms.ModelForm):
         user = kwargs.pop('user')
         super(SolutionForm, self).__init__(*args, **kwargs)
         self.fields['challenge'].queryset = user.developer.challenge_set.all()
+
+
+class SolutionEvaluationForm(forms.ModelForm):
+    class Meta:
+        model=Solution
+        fields=['title', 'description', 'challenge', 'solution_data', 'accuracy']
+
+    def __init__(self, *args, **kwargs):
+        super(SolutionEvaluationForm, self).__init__(*args, **kwargs)
+        self.fields['title'].disabled = True
+        self.fields['description'].disabled = True
+        self.fields['challenge'].disabled = True
+        self.fields['solution_data'].disabled = True
 
 class SolutionCreateView(CreateView):
     template_name = 'solutions/solution_form.html'
@@ -54,6 +69,7 @@ class SolutionCreateView(CreateView):
         form.instance.developer = self.request.user.developer
         form.save()
         return super(SolutionCreateView, self).form_valid(form)
+
 
 class SolutionSpecCreateView(CreateView):
     model = Solution
@@ -79,6 +95,18 @@ class SolutionUpdateView(UserPassesTestMixin, UpdateView):
     def test_func(self):
         solution = self.get_object()
         if self.request.user.developer == solution.developer:
+            return True
+        return False
+
+
+class SolutionEvaluateView(UserPassesTestMixin, UpdateView):
+    model = Solution
+    template_name_suffix = "_evaluate_form"
+    form_class = SolutionEvaluationForm
+
+    def test_func(self):
+        solution = self.get_object()
+        if self.request.user.clinician == solution.challenge.clinician:
             return True
         return False
 

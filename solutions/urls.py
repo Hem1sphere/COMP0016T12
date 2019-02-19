@@ -8,7 +8,8 @@ from .views import (
     SolutionDeleteView,
     SolutionMainView,
     SolutionUpdateView,
-    SolutionSpecCreateView
+    SolutionSpecCreateView,
+    SolutionEvaluateView
 )
  
 urlpatterns = [
@@ -17,5 +18,6 @@ urlpatterns = [
     path('create/', SolutionCreateView.as_view(), name = 'solutions_create'),
     path('create/<challengepk>', SolutionSpecCreateView.as_view(), name = 'solutions_create_spec'),
     path('<int:pk>/update', SolutionUpdateView.as_view(), name = 'solutions_update'),
+    path('<int:pk>/evaluate', SolutionEvaluateView.as_view(), name = 'solutions_evaluate'),
     path('<int:pk>/delete', SolutionDeleteView.as_view(), name = 'solutions_delete')
 ]
