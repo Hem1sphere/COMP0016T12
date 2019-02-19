@@ -11556,3 +11556,17 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     -moz-border-radius: 8px;
     border-radius: 8px;
 }
+
+.basefooter {
+    display: flex;
+    margin-top: 10vh;
+    clear:both;
+  position: relative;
+  bottom: 0px;
+  width: 100%;
+    height: 6vh;
+  background-color: #0b4961;
+  color: white;
+    justify-content: center;
+    align-items: center;
+}
