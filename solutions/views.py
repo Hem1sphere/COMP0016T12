@@ -8,6 +8,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from django import forms
 from .models import Solution
 from .models import Challenge
 from challenges.templatetags import template_methods
@@ -30,9 +31,24 @@ class SolutionMainView(ListView):
 class SolutionDetailView(DetailView):
     model = Solution
 
+class SolutionForm(forms.ModelForm):
+    class Meta:
+        model=Solution
+        fields=['title', 'description', 'challenge', 'solution_data']
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(SolutionForm, self).__init__(*args, **kwargs)
+        self.fields['challenge'].queryset = user.developer.challenge_set.all()
+
 class SolutionCreateView(CreateView):
-    model = Solution
-    fields = ['title', 'description', 'challenge', 'solution_data']
+    template_name = 'solutions/solution_form.html'
+    form_class = SolutionForm
+
+    def get_form_kwargs(self):
+        kwargs = super(SolutionCreateView, self).get_form_kwargs()
+        kwargs ['user'] = self.request.user
+        return kwargs
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
