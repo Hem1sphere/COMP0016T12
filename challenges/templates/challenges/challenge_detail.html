@@ -97,10 +97,13 @@
                role="button">To Jupyter Notebook</a>
             <a class="btn btn-primary btn-lg" href="{% url 'solutions_create_spec' object.pk %}"
                role="button">Submit Solution</a>
+
+             <hr class="my-4">
         {% endif %}
+    
     </div>
 
-    <hr class="my-4">
+
 
     <script>$(document).ready(function () {
         $('#example').DataTable();
