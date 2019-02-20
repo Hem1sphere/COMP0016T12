@@ -1,0 +1,17 @@
+- the management of kaggle, 5W1H
+- AWS servers location and platform, machine learning services (privacy of data)
+- build a classifier 
+- comparison of the platforms for machine learning services (featureset, cost etc)
+- how does algorithmic testing of models work
+
+- UX of Azure vs AWS to build machine learning models
+- whether it is possible to build a closed environment for the development
+
+19/11/2018
+- no use for sagemaker
+  -> sagemaker console cannot be embedded 
+- will use AWS server to host our web app, jupyter notebook will be embedded on our website 
+- use django for server of web app
+  -> django uses python (easier to embed jupyter), convenient for admin control, good for calling APIs 
+- django for database 
+  -> type of database to be determined 

@@ -5,6 +5,8 @@ from .models import Developer
 from .models import Challenge
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 # Create your views here.
 from .models import Challenge
@@ -57,9 +59,10 @@ class ChallengeDetailView(DetailView):
     model = Challenge
 
 
-class ChallengeCreateView(CreateView):
+class ChallengeCreateView(SuccessMessageMixin, CreateView):
     model = Challenge
     fields = ['title',  'award', 'description', 'data']
+    success_message = "The challenge has been successfully created."
 
     def form_valid(self, form):
         form.instance.clinician = self.request.user.clinician
@@ -81,9 +84,15 @@ class ChallengeUpdateView(UserPassesTestMixin, UpdateView):
             return True
         return False
 
+
 class ChallengeDeleteView(UserPassesTestMixin, DeleteView):
     model = Challenge
     success_url = '/'
+    success_message = 'The challenge has been deleted.'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(ChallengeDeleteView, self).delete(request, *args, **kwargs)
 
     def test_func(self):
         challenge = self.get_object()
