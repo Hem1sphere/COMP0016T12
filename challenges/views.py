@@ -70,9 +70,10 @@ class ChallengeCreateView(SuccessMessageMixin, CreateView):
         return super(ChallengeCreateView, self).form_valid(form)
 
 
-class ChallengeUpdateView(UserPassesTestMixin, UpdateView):
+class ChallengeUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = Challenge
     fields = ['title', 'description', 'data']
+    success_message = "The challenge has been successfully updated."
 
     def form_valid(self, form):
         form.instance.clinician = self.request.user.clinician
