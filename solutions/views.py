@@ -13,6 +13,8 @@ from .models import Solution
 from .models import Challenge
 from challenges.templatetags import template_methods
 from django.http import HttpResponse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 
 def solution(request):
@@ -56,9 +58,11 @@ class SolutionEvaluationForm(forms.ModelForm):
         self.fields['challenge'].disabled = True
         self.fields['solution_data'].disabled = True
 
-class SolutionCreateView(CreateView):
+
+class SolutionCreateView(SuccessMessageMixin, CreateView):
     template_name = 'solutions/solution_form.html'
     form_class = SolutionForm
+    success_message = "The solution has been successfully created."
 
     def get_form_kwargs(self):
         kwargs = super(SolutionCreateView, self).get_form_kwargs()
@@ -71,9 +75,10 @@ class SolutionCreateView(CreateView):
         return super(SolutionCreateView, self).form_valid(form)
 
 
-class SolutionSpecCreateView(CreateView):
+class SolutionSpecCreateView(SuccessMessageMixin, CreateView):
     model = Solution
     fields = ['title', 'description', 'solution_data']
+    success_message = "The solution has been successfully created."
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
@@ -84,9 +89,10 @@ class SolutionSpecCreateView(CreateView):
         else: return HttpResponse('<h1>You have not yet participated in that challenge</h1>')
 
 
-class SolutionUpdateView(UserPassesTestMixin, UpdateView):
+class SolutionUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = Solution
     fields = ['title', 'description', 'solution_data']
+    success_message = "The solution has been successfully updated."
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
@@ -114,6 +120,11 @@ class SolutionEvaluateView(UserPassesTestMixin, UpdateView):
 class SolutionDeleteView(UserPassesTestMixin, DeleteView):
     model = Solution
     success_url = '/'
+    success_message = 'The solution has been successfully deleted.'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(SolutionDeleteView, self).delete(request, *args, **kwargs)
 
     def test_func(self):
         solution = self.get_object()

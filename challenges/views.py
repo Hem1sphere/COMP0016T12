@@ -89,7 +89,7 @@ class ChallengeUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
 class ChallengeDeleteView(UserPassesTestMixin, DeleteView):
     model = Challenge
     success_url = '/'
-    success_message = 'The challenge has been deleted.'
+    success_message = 'The challenge has been successfully deleted.'
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
