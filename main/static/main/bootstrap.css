@@ -11585,3 +11585,32 @@ ul > li.masterdetail {
     *display:inline;
     /* this fix is needed for IE7- */
 }
+
+.jumbotron > .tab-pane {
+    display: none;
+}
+
+.jumbotron > .active {
+    display: block;
+}
+
+.container > .nav-pills .nav-link {
+    border-radius: 0.25rem;
+}
+
+.container > .nav-pills .nav-link.active,
+
+.container > .nav-pills .show > .nav-link {
+    color: black;
+    background-color: #fafafa;
+}
+
+.challengetabcontent {
+    padding-top: 1rem;
+    background-color: #fafafa;
+    border-left: 0;
+    float:left;
+    width: 80%;
+    min-height: 20rem;
+    border-top-left-radius: 0
+}
