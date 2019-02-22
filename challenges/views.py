@@ -54,10 +54,6 @@ class ChallengeMainView(ListView):
     context_object_name = 'challenges'
     ordering = ['-date_created']
 
-
-class ChallengeDetailView(DetailView):
-    model = Challenge
-
 class ChallengeOverviewView(DetailView):
     model = Challenge
     template_name = 'challenges/challenge_overview.html'

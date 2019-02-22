@@ -18,35 +18,36 @@
             <div class="col-md-3"></div>
             <div class="col-md-3">
                 <h4>Prize Money: £{{ object.award }}</h4>
-                {% if user.is_developer %}
-                    {% user_is_in_challenge object.pk user.developer.pk as userParticipation %}
-                    <form action="#" method="POST">
-                        {% if userParticipation %}
-                            <a class="btn btn-danger btn-lg" href="{% url 'leave' object.id %}" role="button">Leave
-                                Challenge</a>
-                        {% else %}
-                            <a class="btn btn-primary btn-lg" href="{% url 'participate' object.id %}" role="button">Participate</a>
-                        {% endif %}
-                    </form>
-                {% endif %}
             </div>
         </div>
     </div>
 
 
     <div class="card top-rect">
-        <ul style="padding-left: 1rem">
+        <ul style="padding-left: 1rem; float: left">
             <li class="masterdetail"><a href="{% url 'challenges_overview' object.pk %}">Overview</a></li>
             <li class="masterdetail"><a href="{% url 'challenges_data' object.pk %}">Data</a></li>
             <li class="masterdetail"><a href="{% url 'challenges_solutions' object.pk %}">Solutions</a></li>
             <li class="masterdetail"><a href="{% url 'challenges_discussion' object.pk %}">Discussion</a></li>
             <li class="masterdetail"><a href="{% url 'challenges_leaderboard' object.pk %}">Leaderboard</a></li>
             <li class="masterdetail"><a href="{% url 'challenges_rules' object.pk %}">Rules</a></li>
+            {% if user.is_developer %}
+                {% user_is_in_challenge object.pk user.developer.pk as userParticipation %}
+                {% if userParticipation %}
+                    <a class="btn btn-danger btn-lg" href="{% url 'leave' object.id %}" role="button"
+                       style="float: right; margin-top: 0.8rem; margin-right: 0.5rem">Leave
+                        Challenge</a>
+                {% else %}
+                    <a class="btn btn-primary btn-lg" href="{% url 'participate' object.id %}"
+                       role="button" style="float: right; margin-top: 0.8rem; margin-right: 0.5rem">Participate</a>
+                {% endif %}
+            {% endif %}
         </ul>
+
     </div>
 
     {% block detailedinfo %}
-        {% endblock %}
+    {% endblock %}
 
 
     {% if object.clinician == user.clinician %}
