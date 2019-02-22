@@ -5094,6 +5094,11 @@ input[type="button"].btn-block {
     border-radius: 0.25rem;
 }
 
+.card.top-rect {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
 .card > hr {
     margin-right: 0;
     margin-left: 0;
@@ -11569,4 +11574,14 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
   color: white;
     justify-content: center;
     align-items: center;
+}
+
+ul > li.masterdetail {
+    font-size: 1rem;
+    display: inline-block;
+    padding-right: 0.5rem;
+    padding-top: 1rem;
+    /* You can also add some margins here to make it look prettier */
+    *display:inline;
+    /* this fix is needed for IE7- */
 }
