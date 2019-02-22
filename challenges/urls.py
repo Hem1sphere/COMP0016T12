@@ -9,7 +9,12 @@ from .views import(
     ChallengeCreateView,
     ChallengeUpdateView,
     ChallengeDeleteView,
-    ChallengeOverviewView
+    ChallengeOverviewView,
+    ChallengeDataView,
+    ChallengeDiscussionView,
+    ChallengeLeaderboardView,
+    ChallengeRulesView,
+    ChallengeSolutionsView
 )
  
 urlpatterns = [
@@ -20,5 +25,11 @@ urlpatterns = [
     path('<challengeid>/leavechallenge', views.leaveChallenge, name = 'leave'),
     path('<int:pk>/update', ChallengeUpdateView.as_view(), name = 'challenges_update'),
     path('<int:pk>/delete', ChallengeDeleteView.as_view(), name = 'challenges_delete'),
-    path('<int:pk>/overview', ChallengeOverviewView.as_view(), name = 'challenges_overview')
+    path('<int:pk>/overview', ChallengeOverviewView.as_view(), name = 'challenges_overview'),
+    path('<int:pk>/data', ChallengeDataView.as_view(), name = 'challenges_data'),
+    path('<int:pk>/solutions', ChallengeSolutionsView.as_view(), name = 'challenges_solutions'),
+    path('<int:pk>/discussion', ChallengeDiscussionView.as_view(), name = 'challenges_discussion'),
+    path('<int:pk>/leaderboard', ChallengeLeaderboardView.as_view(), name = 'challenges_leaderboard'),
+    path('<int:pk>/rules', ChallengeRulesView.as_view(), name = 'challenges_rules')
+
 ]

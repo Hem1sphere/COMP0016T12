@@ -62,6 +62,26 @@ class ChallengeOverviewView(DetailView):
     model = Challenge
     template_name = 'challenges/challenge_overview.html'
 
+class ChallengeDataView(DetailView):
+    model = Challenge
+    template_name = 'challenges/challenge_data.html'
+
+class ChallengeSolutionsView(DetailView):
+    model = Challenge
+    template_name = 'challenges/challenge_solutions.html'
+
+class ChallengeDiscussionView(DetailView):
+    model = Challenge
+    template_name = 'challenges/challenge_discussion.html'
+
+class ChallengeLeaderboardView(DetailView):
+    model = Challenge
+    template_name = 'challenges/challenge_leaderboard.html'
+
+class ChallengeRulesView(DetailView):
+    model = Challenge
+    template_name = 'challenges/challenge_rules.html'
+
 
 class ChallengeCreateView(SuccessMessageMixin, CreateView):
     model = Challenge
