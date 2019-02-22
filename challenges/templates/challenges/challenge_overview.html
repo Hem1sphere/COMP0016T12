@@ -5,7 +5,7 @@
 
 <div class="container" style="margin-top: 2rem; padding-left: 0;">
 
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="float:left;">
             <li class="nav-item"><a data-toggle="tab" class="nav-link show active" href="#description">Description</a>
             </li>
             <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#evaluation">Evaluation</a></li>
@@ -14,7 +14,7 @@
         </ul>
 
 
-        <div id="challengeTabContent" class="tab-content" style="padding-top: 1rem">
+        <div id="challengeTabContent" class="tab-content" style="padding-top: 1rem; float:left;">
 
             <div id="description" class="tab-pane fade show active">
                 {{ object.description }}
@@ -45,6 +45,8 @@
 
 
         </div>
+
+        <div class="clearfix"></div>
     </div>
 
     <script>$(document).ready(function () { //to provide sort function
