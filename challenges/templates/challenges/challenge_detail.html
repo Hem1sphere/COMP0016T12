@@ -36,7 +36,7 @@
 
     <div class="card top-rect">
         <ul style="padding-left: 1rem">
-            <li class="masterdetail"><a href="#">Overview</a></li>
+            <li class="masterdetail"><a href="{% url 'challenges_overview' object.pk %}">Overview</a></li>
             <li class="masterdetail"><a href="#">Data</a></li>
             <li class="masterdetail"><a href="#">Solutions</a></li>
             <li class="masterdetail"><a href="#">Discussion</a></li>
@@ -45,57 +45,8 @@
         </ul>
     </div>
 
-    <div class="container" style="margin-top: 2rem; padding-left: 0;">
-
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a data-toggle="tab" class="nav-link show active" href="#description">Description</a>
-            </li>
-            <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#evaluation">Evaluation</a></li>
-            <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#prize">Prize</a></li>
-            <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#timeline">Timeline</a></li>
-        </ul>
-
-
-        <div id="challengeTabContent" class="tab-content" style="padding-top: 1rem">
-
-            <div id="description" class="tab-pane fade show active">
-                {{ object.description }}
-                <div class="container" style="margin-top: 2rem; padding-left: 0">
-                    {% if object.data.url != null %}
-                        {% if user.is_admin or user.is_clinician %}
-                            <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            </div>
-
-            <div id="evaluation" class="tab-pane fade">
-                <h3>To be added</h3>
-            </div>
-
-            <div id="prize" class="tab-pane fade">
-                <h6>The prize money for this particular challenge will be £{{ object.award }}.</h6>
-                <h6>The recipient for the prize will be informed via
-                    <email></email>
-                    .
-                </h6>
-            </div>
-
-            <div id="timeline" class="tab-pane fade">
-                <h3>To be added</h3>
-            </div>
-
-
-        </div>
-    </div>
-
-    {% if object.clinician == user.clinician %}
-        <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'challenges_update' object.id %}">Update</a>
-            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'challenges_delete' object.id %}">Delete</a>
-        </div>
-    {% endif %}
-
+    {% block detailedinfo %}
+        {% endblock %}
 
 
     <hr class="my-4">

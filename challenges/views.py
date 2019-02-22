@@ -58,6 +58,10 @@ class ChallengeMainView(ListView):
 class ChallengeDetailView(DetailView):
     model = Challenge
 
+class ChallengeOverviewView(DetailView):
+    model = Challenge
+    template_name = 'challenges/challenge_overview.html'
+
 
 class ChallengeCreateView(SuccessMessageMixin, CreateView):
     model = Challenge

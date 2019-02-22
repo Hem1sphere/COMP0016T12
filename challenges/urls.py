@@ -8,7 +8,8 @@ from .views import(
     ChallengeMainView,
     ChallengeCreateView,
     ChallengeUpdateView,
-    ChallengeDeleteView
+    ChallengeDeleteView,
+    ChallengeOverviewView
 )
  
 urlpatterns = [
@@ -18,5 +19,6 @@ urlpatterns = [
     path('<challengeid>/participate', views.participateInChallenge, name = 'participate'),
     path('<challengeid>/leavechallenge', views.leaveChallenge, name = 'leave'),
     path('<int:pk>/update', ChallengeUpdateView.as_view(), name = 'challenges_update'),
-    path('<int:pk>/delete', ChallengeDeleteView.as_view(), name = 'challenges_delete')
+    path('<int:pk>/delete', ChallengeDeleteView.as_view(), name = 'challenges_delete'),
+    path('<int:pk>/overview', ChallengeOverviewView.as_view(), name = 'challenges_overview')
 ]
