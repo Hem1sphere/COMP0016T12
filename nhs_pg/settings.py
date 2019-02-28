@@ -25,7 +25,7 @@ SECRET_KEY = 'dgtv8v@_gz!qh1h&+ab9tam!o8sw8h#za4z43=(7lm))b-_m06'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["www.nhsplayground.azurewebsites.net/"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
