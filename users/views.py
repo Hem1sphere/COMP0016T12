@@ -6,6 +6,7 @@ from django.contrib import messages
 from challenges.models import Challenge
 from .models import User
 from .forms import DeveloperRegisterForm, ClinicianRegisterForm, UserUpdateForm, ProfileUpdateForm
+import logging
 
 # from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -80,5 +81,9 @@ class ClinicianRegisterView(CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
-        return redirect('login')
+        try:
+            user = form.save()
+            return redirect('login')
+        except Exception as exp:
+          logging.error(exp)  # For python 3
+          return HttpResponse(exp, status=400)
