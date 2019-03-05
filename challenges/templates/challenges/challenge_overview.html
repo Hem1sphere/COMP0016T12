@@ -18,17 +18,10 @@
 
             <div id="description" class="tab-pane fade show active">
                 {{ object.description }}
-                <div class="container" style="margin-top: 2rem; padding-left: 0">
-                    {% if object.data.url != null %}
-                        {% if user.is_admin or user.is_clinician %}
-                            <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
-                        {% endif %}
-                    {% endif %}
-                </div>
             </div>
 
             <div id="evaluation" class="tab-pane fade">
-                <h3>To be added</h3>
+                {{ object.evaluation }}
             </div>
 
             <div id="prize" class="tab-pane fade">
@@ -40,9 +33,7 @@
             </div>
 
             <div id="timeline" class="tab-pane fade">
-                <h3>To be added</h3>
-            </div>
-
+                {{ object.timeline }}
 
         </div>
 
