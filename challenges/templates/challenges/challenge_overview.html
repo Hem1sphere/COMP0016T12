@@ -17,7 +17,7 @@
         <div id="challengeTabContent" class="jumbotron challengetabcontent">
 
             <div id="description" class="tab-pane fade show active">
-                {{ object.description }}
+                {{ object.description|safe }}
             </div>
 
             <div id="evaluation" class="tab-pane fade">
@@ -38,8 +38,10 @@
         </div>
 
 
-        <div class="clearfix"></div>
+
     </div>
+
+    <div class="clearfix"></div>
 
     <script>$(document).ready(function () { //to provide sort function
         $('#solution_table').DataTable();
