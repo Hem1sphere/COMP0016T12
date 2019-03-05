@@ -13,6 +13,9 @@ class Challenge(models.Model):
     clinician = models.ForeignKey(Clinician, on_delete=models.CASCADE, related_name="creator")  # clinician who created the challenge
     developers = models.ManyToManyField(Developer, blank=True)  # developerS who indicated interest
     description = models.TextField(default="")
+    evaluation = models.TextField(default="")
+    timeline = models.TextField(default="")
+    rule = models.TextField(default="")
     data = models.FileField(blank=True)
 
     def get_developers(self):
