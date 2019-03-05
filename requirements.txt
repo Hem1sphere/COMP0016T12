@@ -3,4 +3,6 @@ django-crispy-forms==1.7.2
 django-extensions==2.1.4
 Pillow==5.4.0
 pytz==2018.7
+pyodbc==4.0.26
+django-pyodbc-azure==2.1.0.0
 
