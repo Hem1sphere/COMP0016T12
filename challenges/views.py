@@ -92,7 +92,7 @@ class ChallengeCreateView(SuccessMessageMixin, CreateView):
 
 class ChallengeUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = Challenge
-    fields = ['title', 'description', 'data']
+    fields = ['title',  'award', 'description', 'data', 'evaluation', 'timeline', 'rule']
     success_message = "The challenge has been successfully updated."
 
     def form_valid(self, form):
