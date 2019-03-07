@@ -21,7 +21,7 @@
             </div>
 
             <div id="evaluation" class="tab-pane fade">
-                {{ object.evaluation }}
+                {{ object.evaluation|safe }}
             </div>
 
             <div id="prize" class="tab-pane fade">
@@ -33,7 +33,7 @@
             </div>
 
             <div id="timeline" class="tab-pane fade">
-                {{ object.timeline }}
+                {{ object.timeline|safe }}
 
         </div>
 
