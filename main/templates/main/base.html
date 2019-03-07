@@ -13,9 +13,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'main/bootstrap.css' %}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
     {% if title %}
-        <title>NHS PG - {{ title }}</title>
+        <title>CareAI PlayGround - {{ title }}</title>
     {% else %}
-        <title>NHS PG</title>
+        <title>CareAI PlayGrouns</title>
     {% endif %}
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -37,7 +37,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 2rem">
-    <a class="navbar-brand" href="{% url 'main-page' %}">NHS PG</a>
+    <a class="navbar-brand" href="{% url 'main-page' %}">CareAI PlayGround</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
             aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
