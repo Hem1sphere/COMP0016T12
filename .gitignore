@@ -112,5 +112,8 @@ venv.bak/
 
 .DS_Store
 .idea/workspace.xml
+<<<<<<< HEAD
 .deployment
+=======
+>>>>>>> master
 .vscode/
