@@ -22,10 +22,17 @@ from django.contrib.auth import views as auth_views
 from users import views as user_views
 from django.views.static import serve
 # from . import views
+from django.conf.urls import url
+from ckeditor_uploader import views as uploader_views
+from django.views.decorators.cache import never_cache
 
 urlpatterns = [
     url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^ckeditor/upload/',
+        uploader_views.upload, name='ckeditor_upload'),
+    url(r'^ckeditor/browse/',
+        never_cache(uploader_views.browse), name='ckeditor_browse'),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('challenges/', include('challenges.urls')),
