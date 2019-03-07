@@ -25,11 +25,7 @@
             </div>
 
             <div id="prize" class="tab-pane fade">
-                <h6>The prize money for this particular challenge will be £{{ object.award }}.</h6>
-                <h6>The recipient for the prize will be informed via
-                    <email></email>
-                    .
-                </h6>
+                {{ object.award|safe }}
             </div>
 
             <div id="timeline" class="tab-pane fade">
