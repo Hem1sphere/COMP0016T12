@@ -15,7 +15,7 @@
             {% endif %}">{{ challenge.clinician }}</a> on {{ challenge.date_created }}</div>
       <div class="card-body">
           <h4> <a class="card-title" href="{% url 'challenges_detail' challenge.id %}">{{ challenge.title }}</a></h4>
-        <p class="card-text">{{ challenge.description|safe }}</p>
+        <p class="card-text">{{ challenge.description }}</p>
       </div>
     </div>
     {% endfor %}

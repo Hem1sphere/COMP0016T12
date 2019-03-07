@@ -555,17 +555,6 @@ pre code {
     margin-left: auto;
 }
 
-/*two entries below are added for tabs*/
-
-.container > .tab-pane {
-    display: none;
-}
-
-.container > .active {
-    display: block;
-}
-
-
 @media (min-width: 576px) {
     .container {
         max-width: 540px;
@@ -4588,12 +4577,6 @@ input[type="button"].btn-block {
 .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #158CBA;
-}
-
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link.nav-link-form {
-    color: black;
-    background-color: white;
 }
 
 .nav-fill .nav-item {
@@ -11625,17 +11608,6 @@ ul > li.masterdetail {
 .challengetabcontent {
     padding-top: 1rem;
     background-color: #fafafa;
-    border-left: 0;
-    float:left;
-    width: 80%;
-    min-height: 20rem;
-    border-top-left-radius: 0
-}
-
-
-.challengecreationtabcontent {
-    padding-top: 1rem;
-    background-color: white;
     border-left: 0;
     float:left;
     width: 80%;

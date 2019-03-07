@@ -1,8 +1,7 @@
-from django.urls import path,include
+from django.urls import path
 from . import views
 
 urlpatterns = [
     path('', views.main, name="main-page"),
-    path('tutorial/', views.tutorial, name="tutorial"),
-    path('discussion/',include('discussion.urls')),
+    path('tutorial/', views.tutorial, name="tutorial")
 ]
