@@ -1,0 +1,95 @@
+{% extends 'main/base.html' %}
+
+<div class="jumbotron">
+  <p class="lead">
+    {% block content %}
+
+       <div class="col-lg-8 col-md-7 col-sm-6">
+        <h1>Welcome to Discussion</h1>
+       </div>
+{% load static %}
+            <img src="{% static "pictures/pic3.jpeg" %}"  style="width: 58rem; height:15rem"alt="...">
+  <p> </p>       
+        </div>
+
+    {% for discussion in discussions %}
+
+        <div class="card mb-2" style="padding: 2rem">
+      <div class="card-subtitle">Discussion posted by {{ discussion.author }}</a> on {{ discussion.date_posted }}</div>
+      <div class="card-body">
+          <h4> <a class="card-title" href="{% url 'challenges_detail' discussion.id %}">{{ discussion.title }}</a></h4>
+        <p class="card-text">{{ discussion.content }}</p>
+      </div>
+    </div>
+    {% endfor %}
+
+    
+    <p> </p>
+    <div class="card" style="width: 60rem;">
+        <div class="card-header">
+        </div>
+    <div class="card-body">
+    <p><h5 style="color:#33A0E9"> 
+    {% load static %}
+            <img src="{% static "pictures/pic_qa.png" %}" style="float:left;width:2.3rem;height:1.7rem; margin-right:0.5rem" />
+    Have you taken challenges today?   posted by Developer00 on 05/03/2019</h5><p>
+   <p>deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia.....</p>
+   </div>
+</div>
+
+<br>
+    <div class="card" style="width: 60rem;">
+        <div class="card-header">
+        </div>
+    <div class="card-body">
+    <p><h5 style="color:#33A0E9">
+    {% load static %}
+            <img src="{% static "pictures/pic_qa.png" %}" style="float:left;width:2.3rem;height:1.7rem; margin-right:0.5rem" />
+    Questions about ChallengeX posted by Captain Marvell on 05/03/2019</h5><p>
+   <p>t et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reicie......</p>
+   </div>
+</div>
+
+<br>
+    <div class="card" style="width: 60rem;">
+        <div class="card-header">
+        </div>
+    <div class="card-body">
+    <p><h5 style="color:#33A0E9">
+    {% load static %}
+            <img src="{% static "pictures/pic_qa.png" %}" style="float:left;width:2.3rem;height:1.7rem; margin-right:0.5rem" />
+    Which machine learning algorithms do you use in ChallengeAny posted by BestProgrammer on 05/03/2019</h5><p>
+   <p>With supporting text below as a natural lead-in to additional content.</p>
+   </div>
+</div>
+
+
+
+
+
+
+
+    {% comment %} {% for discussion in discussions %}
+
+    <div class="card mb-2" style="padding: 2rem">
+      <div class="card-subtitle">Discussion created by <a href="
+            {% if user == disscussion.discussion_developer.user %}
+                {% url 'profile'%}
+            {% else %}
+                {% url 'specific_profile' discussion.discussion_developer %}
+            {% endif %}">{{discussion.discussion_developer }}</a> on {{ discussion.date_posted }}</div>
+      
+      <div class="card-body">
+          <h4> <a class="card-title" href="{% url 'discussion_detail' discussion.id %}">{{ discussion.title }}</a></h4>
+          <p class="card-text">{{ discussion.description }}</p>
+          <p class="card-text">{{ discussion.description }}</p>
+
+      </div>
+
+    </div>
+
+    {% endfor %} {% endcomment %}
+
+    {% endblock %}
+  </p>
+</div>
