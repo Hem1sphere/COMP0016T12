@@ -3,7 +3,7 @@
 {% block detailedinfo %}
 
 
-    <div class="container" style="margin-top: 2rem; padding-left: 0; margin-bottom: 1rem">
+    <div class="container" style="margin-top: 2rem; padding-left: 0;padding-right: 0; margin-bottom: 1rem">
 
         <ul class="nav flex-column nav-pills" style="float:left; width: 20%;">
             <li class="nav-item"><a data-toggle="tab" class="nav-link show active" href="#description">Description</a>
@@ -14,41 +14,30 @@
         </ul>
 
 
-        <div id="challengeTabContent" class="jumbotron challengetabcontent">
+        <div id="challengeTabContent" class="jumbotron challengetabcontent" style="overflow: auto">
 
             <div id="description" class="tab-pane fade show active">
-                {{ object.description }}
-                <div class="container" style="margin-top: 2rem; padding-left: 0">
-                    {% if object.data.url != null %}
-                        {% if user.is_admin or user.is_clinician %}
-                            <a class="btn btn-primary" href="{{ object.data.url }}" download>Download Data</a>
-                        {% endif %}
-                    {% endif %}
-                </div>
+                {{ object.description|safe }}
             </div>
 
             <div id="evaluation" class="tab-pane fade">
-                <h3>To be added</h3>
+                {{ object.evaluation|safe }}
             </div>
 
             <div id="prize" class="tab-pane fade">
-                <h6>The prize money for this particular challenge will be £{{ object.award }}.</h6>
-                <h6>The recipient for the prize will be informed via
-                    <email></email>
-                    .
-                </h6>
+                {{ object.award|safe }}
             </div>
 
             <div id="timeline" class="tab-pane fade">
-                <h3>To be added</h3>
-            </div>
-
+                {{ object.timeline|safe }}
 
         </div>
 
 
-        <div class="clearfix"></div>
+
     </div>
+
+    <div class="clearfix"></div>
 
     <script>$(document).ready(function () { //to provide sort function
         $('#solution_table').DataTable();
