@@ -15,6 +15,9 @@ from challenges.templatetags import template_methods
 from django.http import HttpResponse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+import sys
+from nbconvert import HTMLExporter
+import nbformat
 
 
 def solution(request):
