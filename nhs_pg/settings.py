@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'challenges.apps.ChallengesConfig',
     'main.apps.MainConfig',
     'solutions.apps.SolutionsConfig',
+    'tutorial.apps.TutorialConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
