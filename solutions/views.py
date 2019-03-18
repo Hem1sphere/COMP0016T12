@@ -15,6 +15,9 @@ from challenges.templatetags import template_methods
 from django.http import HttpResponse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+import sys
+from nbconvert import HTMLExporter
+import nbformat
 
 
 def solution(request):
@@ -22,6 +25,16 @@ def solution(request):
         'solutions': Solution.objects.all()
     }
     return render(request, 'solutions/solution_list.html', context)
+
+
+def notebookconverthtml(nbfile, htmlfile):
+    html_exporter = HTMLExporter()
+    nb = nbformat.reads(open(nbfile, 'r').read(), as_version=4)
+    (body, resources) = html_exporter.from_notebook_node(nb)
+    htmlfile = nbfile.replace(".ipynb", ".html")
+    html_file_writer = open(htmlfile, 'w')
+    html_file_writer.write(body)
+    html_file_writer.close()
 
 
 class SolutionMainView(ListView):
@@ -71,7 +84,7 @@ class SolutionCreateView(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
-        form.save()
+        notebookconverthtml(form.instance.solution_notebook_htmlver, form.instance.solution_notebook_htmlver)
         return super(SolutionCreateView, self).form_valid(form)
 
 
