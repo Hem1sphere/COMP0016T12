@@ -55,11 +55,10 @@ class SolutionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
-        challengepk = kwargs.pop('challengepk', None)
+        challengepk = kwargs.pop('challengepk')
         super(SolutionForm, self).__init__(*args, **kwargs)
         self.fields['challenge'].queryset = user.developer.challenge_set.all()
-        if challengepk != 0:
-            print("PK is " + challengepk + ", and this line should not be executed/printed")
+        if challengepk != "BasePage":
             self.fields['challenge'].initial = Challenge.objects.get(pk=challengepk)
 
 class SolutionEvaluationForm(forms.ModelForm):

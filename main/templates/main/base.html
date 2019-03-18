@@ -65,7 +65,7 @@
             {% if user.is_clinician or user.is_admin %}
                 <a class="btn btn-info" href="{% url 'challenges_create' %}">New Challenge</a>
             {% elif user.is_developer %}
-                <a class="btn btn-info" href="{% url 'solutions_create' 0 %}">New Solution</a>
+                <a class="btn btn-info" href="{% url 'solutions_create' "BasePage" %}">New Solution</a>
             {% endif %}
             {% if user.is_authenticated %}
                 <li class="nav-item{% if request.resolver_match.view_name == 'profile' %} active {% endif %}">
