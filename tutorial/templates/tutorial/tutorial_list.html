@@ -4,7 +4,7 @@
 <div class="jumbotron">
   <p class="lead">
       {% block content %}
-    {% for challenge in challenges %}
+    {% for tutorial in tutorials %}
 
         <div class="card mb-2" style="padding: 2rem">
       <div class="card-subtitle">Tutorial created by <a href="
@@ -12,7 +12,7 @@
                 {% url 'profile'%}
             {% else %}
                 {% url 'specific_profile' tutorial.creator %}
-            {% endif %}">{{ tutorial.creator }}</a> on {{ tutorail.date_created }}</div>
+            {% endif %}">{{ tutorial.creator }}</a> on {{ tutorial.date_created }}</div>
       <div class="card-body">
           <h4> <a class="card-title" href="{% url 'tutorial_detail' tutorial.id %}">{{ tutorial.title }}</a></h4>
         <p class="card-text">{{ challenge.brief }}</p>

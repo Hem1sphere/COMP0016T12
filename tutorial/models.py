@@ -2,6 +2,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils import timezone
 from users.models import User
+from django.urls import reverse
 
 
 # Create your models here.
@@ -13,3 +14,5 @@ class Tutorial(models.Model):
     description = RichTextUploadingField()
     data = models.FileField(blank=True)
 
+    def get_absolute_url(self):
+        return reverse('tutorial_detail', kwargs={'pk': self.pk})

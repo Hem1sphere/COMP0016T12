@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from .models import Tutorial
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -19,11 +19,11 @@ from django.views.generic import (
 class TutorialMainView(ListView):
     model = Tutorial
     template_name = 'tutorial/tutorial_list.html'
-    context_object_name = 'tutorial'
+    context_object_name = 'tutorials'
     ordering = ['-date_created']
 
 
-class TutorialCreateView(SuccessMessageMixin, CreateView):
+class TutorialCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Tutorial
     fields = ['title',  'prerequisites', 'description', 'data']
     success_message = "The tutorial has been successfully created."
@@ -33,3 +33,44 @@ class TutorialCreateView(SuccessMessageMixin, CreateView):
         form.save()
         return super(TutorialCreateView, self).form_valid(form)
 
+
+class TutorialOverviewView(DetailView):
+    model = Tutorial
+    template_name = 'tutorial/tutorial_overview.html'
+
+
+class TutorialDataView(DetailView):
+    model = Tutorial
+    template_name = 'tutorial/tutorial_data.html'
+
+
+class TutorialUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
+    model = Tutorial
+    fields = ['title', 'prerequisites', 'description', 'data']
+    success_message = "The tutorial has been successfully updated."
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super(TutorialUpdateView, self).form_valid(form)
+
+    def test_func(self):
+        tutorial = self.get_object()
+        if self.request.user == tutorial.creator:
+            return True
+        return False
+
+
+class TutorialDeleteView(UserPassesTestMixin, DeleteView):
+    model = Tutorial
+    success_url = '/'
+    success_message = 'The tutorial has been successfully deleted.'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(TutorialDeleteView, self).delete(request, *args, **kwargs)
+
+    def test_func(self):
+        tutorial = self.get_object()
+        if self.request.user == tutorial.creator:
+            return True
+        return False
