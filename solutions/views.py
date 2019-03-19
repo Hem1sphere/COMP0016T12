@@ -96,11 +96,12 @@ class SolutionCreateView(SuccessMessageMixin, CreateView):
 
 class SolutionUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = Solution
-    fields = ['title', 'description', 'solution_data']
+    fields = ['title', 'description', 'solution_notebook', 'solution_data']
     success_message = "The solution has been successfully updated."
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
+        form.instance.solution_notebook_htmlver = notebookconverthtml(form.instance.solution_notebook)
         return super(SolutionUpdateView, self).form_valid(form)
 
     def test_func(self):
