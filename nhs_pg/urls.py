@@ -33,6 +33,8 @@ urlpatterns = [
     path('', include('main.urls')),
     path('challenges/', include('challenges.urls')),
     path('solutions/', include('solutions.urls')),
+    path('discussion/', include('discussion.urls')),
+    path('tutorial/', include('tutorial.urls')),
     path('register/', user_views.RegisterView.as_view(), name='register'),
     path('profile/<username>', user_views.specific_profile, name='specific_profile'),
     path('profile/', user_views.profile, name='profile'),

@@ -1,14 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from .models import Developer
-from .models import Challenge
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-
-# Create your views here.
 from .models import Challenge
 from django.views.generic import (
     ListView,
