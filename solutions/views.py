@@ -27,14 +27,15 @@ def solution(request):
     return render(request, 'solutions/solution_list.html', context)
 
 
-def notebookconverthtml(nbfile, htmlfile):
+def notebookconverthtml(nbfile):
     html_exporter = HTMLExporter()
-    nb = nbformat.reads(open(nbfile, 'r').read(), as_version=4)
+    nb = nbformat.reads(nbfile.read(), as_version=4)
     (body, resources) = html_exporter.from_notebook_node(nb)
-    htmlfile = nbfile.replace(".ipynb", ".html")
+    htmlfile = nbfile.name.replace(".ipynb", ".html")
     html_file_writer = open(htmlfile, 'w')
     html_file_writer.write(body)
     html_file_writer.close()
+    return htmlfile
 
 
 class SolutionMainView(ListView):
@@ -51,7 +52,7 @@ class SolutionDetailView(DetailView):
 class SolutionForm(forms.ModelForm):
     class Meta:
         model=Solution
-        fields=['title', 'description', 'challenge', 'solution_data']
+        fields=['title', 'description', 'challenge', 'solution_notebook', 'solution_data']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
@@ -87,7 +88,7 @@ class SolutionCreateView(SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
-        notebookconverthtml(form.instance.solution_notebook_htmlver, form.instance.solution_notebook_htmlver)
+        form.instance.solution_notebook_htmlver = notebookconverthtml(form.instance.solution_notebook)
         return super(SolutionCreateView, self).form_valid(form)
 
 

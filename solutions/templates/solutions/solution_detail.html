@@ -32,6 +32,7 @@
 
         {% if object.solution_notebook.url != null %}
             <a class="btn btn-primary" href="{{ object.solution_notebook.url }}" download>Download Notebook</a>
+            <a class="btn btn-primary" href="{{ object.solution_notebook_htmlver.url }}" download>View Notebook</a>
         {% endif %}
     </div>
 {% endblock %}

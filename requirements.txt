@@ -1,3 +1,5 @@
+nbconvert
+nbformat
 Django==2.1.5
 django-crispy-forms==1.7.2
 django-extensions==2.1.4
