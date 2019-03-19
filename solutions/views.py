@@ -55,9 +55,11 @@ class SolutionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
+        challengepk = kwargs.pop('challengepk')
         super(SolutionForm, self).__init__(*args, **kwargs)
         self.fields['challenge'].queryset = user.developer.challenge_set.all()
-
+        if challengepk != "BasePage":
+            self.fields['challenge'].initial = Challenge.objects.get(pk=challengepk)
 
 class SolutionEvaluationForm(forms.ModelForm):
     class Meta:
@@ -80,26 +82,13 @@ class SolutionCreateView(SuccessMessageMixin, CreateView):
     def get_form_kwargs(self):
         kwargs = super(SolutionCreateView, self).get_form_kwargs()
         kwargs ['user'] = self.request.user
+        kwargs ['challengepk'] = self.kwargs['challengepk']
         return kwargs
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
         notebookconverthtml(form.instance.solution_notebook_htmlver, form.instance.solution_notebook_htmlver)
         return super(SolutionCreateView, self).form_valid(form)
-
-
-class SolutionSpecCreateView(SuccessMessageMixin, CreateView):
-    model = Solution
-    fields = ['title', 'description', 'solution_data']
-    success_message = "The solution has been successfully created."
-
-    def form_valid(self, form):
-        form.instance.developer = self.request.user.developer
-        form.instance.challenge = Challenge.objects.get(pk=self.kwargs['challengepk'])
-        if template_methods.user_is_in_challenge(self.kwargs['challengepk'], self.request.user.developer.id):
-            form.save()
-            return super(SolutionSpecCreateView, self).form_valid(form)
-        else: return HttpResponse('<h1>You have not yet participated in that challenge</h1>')
 
 
 class SolutionUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
