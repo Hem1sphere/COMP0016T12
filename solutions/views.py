@@ -18,6 +18,7 @@ from django.contrib import messages
 import sys
 from nbconvert import HTMLExporter
 import nbformat
+from django.conf import settings
 
 
 def solution(request):
@@ -32,7 +33,8 @@ def notebookconverthtml(nbfile):
     nb = nbformat.reads(nbfile.read(), as_version=4)
     (body, resources) = html_exporter.from_notebook_node(nb)
     htmlfile = nbfile.name.replace(".ipynb", ".html")
-    html_file_writer = open(htmlfile, 'w')
+    html_file_writer = open(settings.MEDIA_ROOT + "/" + htmlfile, 'w')
+    print(settings.MEDIA_ROOT + "/" + htmlfile)
     html_file_writer.write(body)
     html_file_writer.close()
     return htmlfile
