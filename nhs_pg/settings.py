@@ -148,3 +148,12 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+
+# Email settings
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'careai.pg@gmail.com'
+EMAIL_HOST_PASSWORD = 'BemaniUser12'
+EMAIL_PORT = 587
