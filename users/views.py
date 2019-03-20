@@ -6,6 +6,7 @@ from django.contrib import messages
 from challenges.models import Challenge
 from .models import User
 from .forms import DeveloperRegisterForm, ClinicianRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django_registration.backends.activation.views import RegistrationView
 
 # from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -57,7 +58,7 @@ class RegisterView(TemplateView):
     template_name = "users/register.html"
 
 
-class DeveloperRegisterView(CreateView):
+class DeveloperRegisterView(RegistrationView):
     model = User
     form_class = DeveloperRegisterForm
     template_name = 'users/registration_form.html'
@@ -71,7 +72,7 @@ class DeveloperRegisterView(CreateView):
         return redirect('login')
 
 
-class ClinicianRegisterView(CreateView):
+class ClinicianRegisterView(RegistrationView):
     model = User
     form_class = ClinicianRegisterForm
     template_name = 'users/registration_form.html'
@@ -83,3 +84,5 @@ class ClinicianRegisterView(CreateView):
     def form_valid(self, form):
         user = form.save()
         return redirect('login')
+
+

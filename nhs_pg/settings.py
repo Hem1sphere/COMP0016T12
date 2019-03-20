@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'discussion',
     'ckeditor',
     'ckeditor_uploader',
+    'django_registration'
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'careai.pg@gmail.com'
 EMAIL_HOST_PASSWORD = 'BemaniUser12'
 EMAIL_PORT = 587
+
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_OPEN = True

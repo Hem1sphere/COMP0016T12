@@ -29,6 +29,7 @@ urlpatterns = [
         uploader_views.upload, name='ckeditor_upload'),
     url(r'^ckeditor/browse/',
         never_cache(uploader_views.browse), name='ckeditor_browse'),
+    url(r'^/', include('django_registration.backends.activation.urls')),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('challenges/', include('challenges.urls')),

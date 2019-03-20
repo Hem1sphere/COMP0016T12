@@ -9,6 +9,7 @@ from PIL import Image
 
 # Create your models here.
 class User(AbstractUser):
+    is_active = False
     is_admin = models.BooleanField(default=False)
     is_developer = models.BooleanField(default=False)
     is_clinician = models.BooleanField(default=False)
