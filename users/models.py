@@ -12,6 +12,7 @@ class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_developer = models.BooleanField(default=False)
     is_clinician = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
 
 class Developer(models.Model):
