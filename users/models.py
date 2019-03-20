@@ -16,6 +16,7 @@ class User(AbstractUser):
 
 
 class Developer(models.Model):
+    is_active = False
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -23,6 +24,7 @@ class Developer(models.Model):
 
 
 class Clinician(models.Model):
+    is_active = False
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -30,6 +32,7 @@ class Clinician(models.Model):
 
 
 class Admin(models.Model):
+    is_active = False
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
