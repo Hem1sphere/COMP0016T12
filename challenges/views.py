@@ -119,6 +119,8 @@ class ChallengeDeleteView(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         challenge = self.get_object()
-        if self.request.user.clinician == challenge.clinician:
-            return True
-        return False
+        try:
+            if self.request.user.clinician == challenge.clinician:
+                return True
+        except:
+            return False

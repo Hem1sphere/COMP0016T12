@@ -54,6 +54,10 @@ class ChallengeDeleteViewTest(TestCase):
         response = self.client.get(reverse('challenges_delete', kwargs={"pk": 1}))
         self.assertEqual(response.status_code, 403)
 
+    def test_view_redirects_for_users_not_logged_in(self):
+        response = self.client.get(reverse('challenges_delete', kwargs={"pk": 1}))
+        self.assertRedirects(response, '/login/?next=/challenges/1/delete')
+
     def test_view_deletes_challenge_when_posted_to(self):
         self.client.login(username="testuser1", password="hello123!")
         response = self.client.post(reverse("challenges_delete", kwargs={"pk": 1}))
