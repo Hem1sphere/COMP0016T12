@@ -30,7 +30,7 @@ class DeveloperCreationViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertFormError(response, 'form', 'password2', 'The two password fields didn\'t match.')
 
-    def test_valid_developer_form_data_returns_302(self):
+    def test_valid_developer_form_data_returns_302_response(self):
         response = self.client.post(reverse('developer_register'), {
             "username": "TestDeveloper",
             "email": "test@gmail.com",
@@ -71,7 +71,7 @@ class ClinicianCreationViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertFormError(response, 'form', 'password2', 'The two password fields didn\'t match.')
 
-    def test_valid_clinician_form_data_returns_302(self):
+    def test_valid_clinician_form_data_returns_302_response(self):
         response = self.client.post(reverse('clinician_register'), {
             "username": "TestClinician",
             "email": "test@gmail.com",
