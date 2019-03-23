@@ -103,9 +103,11 @@ class ChallengeUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         challenge = self.get_object()
-        if self.request.user.clinician == challenge.clinician:
-            return True
-        return False
+        try:
+            if self.request.user.clinician == challenge.clinician:
+                return True
+        except AttributeError:
+            return False
 
 
 class ChallengeDeleteView(UserPassesTestMixin, DeleteView):
@@ -122,5 +124,5 @@ class ChallengeDeleteView(UserPassesTestMixin, DeleteView):
         try:
             if self.request.user.clinician == challenge.clinician:
                 return True
-        except:
+        except AttributeError:
             return False
