@@ -54,9 +54,9 @@
             <li class="nav-item{% if request.resolver_match.view_name == 'solutions_main' %} active {% endif %}">
                 <a class="nav-link" href="{% url 'solutions_main' %}">Solutions</a>
             </li>
-            {% comment %} <li class="nav-item{% if request.resolver_match.view_name == 'discussion_main' %} active {% endif %}">
+            <li class="nav-item{% if request.resolver_match.view_name == 'discussion_main' %} active {% endif %}">
                 <a class="nav-link" href="{% url 'discussion_main' %}">Discussion</a>
-            </li> {% endcomment %}
+            </li> 
             <li class="nav-item{% if request.resolver_match.view_name == 'tutorial' %} active {% endif %}">
                 <a class="nav-link" href="{% url 'tutorial_main' %}">Tutorial</a>
             </li>
