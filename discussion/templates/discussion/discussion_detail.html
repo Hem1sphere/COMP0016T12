@@ -1,0 +1,80 @@
+{% extends 'main/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class="card mb-2" style="padding: 0.5rem;">
+
+<div class="card-body">
+    
+          {% load static %}
+            <img src="{% static "pictures/pic_qa.png" %}" style="float:left;width:2.3rem;height:1.7rem; margin-right:0.5rem" />
+            
+            <h4> <a class="card-title">{{ object.title }}</a></h4>    
+            
+            <p class="card-text"> Posted by {{ object.author }} on {{object.date_posted}} 
+            <hr class="featurette-divider">
+            {{  object.content }} </p> 
+</div>
+
+</div>
+
+{% for each_discussion in each_discussion %}
+
+{% if object.title == each_discussion.discussion.title%}
+
+<div class="card mb-2" style="padding: 0.5rem;">
+      
+      <div class="card-subtitle"></div>
+
+        <div class="card-body">
+    
+          {% load static %}
+            <img src="{% static "pictures/comment.jpg" %}" style="float:left;width:2.3rem;height:1.7rem; margin-right:0.5rem" />
+
+            <h5> <a class="card-title">
+            Commented by {{ each_discussion.commenter}}
+            on </a> {{ each_discussion.date_commented }}
+            </a></h5>   
+            <hr class="featurette-divider">
+            
+            <div class="card-text" style="padding:0.5rem">{{ each_discussion.comment }} </div>
+        </div>
+</div>
+
+{% endif %}
+
+{% endfor %} 
+
+
+
+<div style="padding-top:1rem">
+        {% if user.is_admin or user.is_developer %}
+            <div class="content-section">
+            <form method="post">
+                  <label style="font-size:1rem"> <strong> My Comment:</strong></label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4">
+                {{form.}}
+                </textarea>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block"  style="font-size:1rem;margin-top:1.5rem">
+                Commit My Comment</button>
+
+            </form>
+
+            </div>
+
+        {% else %}
+            <legend class="border-bottom mb-4">You are not allowed to add a comment.</legend>
+        {% endif %}
+</div> 
+
+
+
+
+
+
+</div>
+{% endblock %}

@@ -11,17 +11,34 @@ class Discussion(models.Model):
     content = models.TextField(default="")
     author = models.ForeignKey(Developer, on_delete=models.CASCADE)
     
-    def get_dicussion_absolute_url(self):
+    def get_absolute_url(self):
         return reverse('discussion_detail', kwargs={'pk': self.pk}) 
-  
     
     def __str__(self):
         return f'Discussion: {self.title}'
 
+    def get_author(self):
+        return f'Discussion: {self.author}'
+
+
 
 class Each_discussion(models.Model):
+    discussion = models.ForeignKey(Discussion,on_delete=models.CASCADE)
     date_commented = models.DateTimeField(default=timezone.now)
-    comment = models.TextField(default="")
+    comment = models.TextField(default="_")
     commenter = models.ForeignKey(Developer, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'Each_discussion: {self.commenter}'
+
+    def get_discussion_title(self):
+        return f'Each_discussion: {self.discussion.title}'
+
+
+
+
+
+
+
     
 

@@ -9,12 +9,12 @@ from django.views.generic import (
     DeleteView
 )
 from django import forms
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpRequest
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from .models import Discussion
+from .models import Discussion,Each_discussion
 
-# from .models import Discussion
+
 
 def discussion(request):
     context = {
@@ -23,22 +23,71 @@ def discussion(request):
     return render(request, 'discussion/discussion_list.html', context)
 
 
-# def user_is_discussing(discussionid, userid):
-#     current_discussion = Discussion.objects.get(pk=discussionid)
-#     for devs in current_discussion.discussion_developer.all():
-#         if devs.pk == userid:
-#             return True
-#     return False
 
-# def participateInDiscussion(request, discussionid):
-#     user = Developer.objects.get(user=request.user)
-#     if not user_is_participating(challengeid, user.pk):
-#         Challenge.objects.get(pk=challengeid).developers.add(user)
-#         # return render(request, 'challenges/challenge_list.html')
-#     return HttpResponseRedirect(reverse('challenges_detail', args=[challengeid]))
+# All Forms
+
+class DiscussionCreateForm(forms.ModelForm):
+    class Meta:
+        model= Discussion
+        fields=['title', 'content']
+
+
+class CommentCreateForm(forms.ModelForm):
+    class Meta:
+        model= Each_discussion
+        fields=['comment']
+
+
+
+# All Views
 
 class DiscussionMainView(ListView):
     model = Discussion
     template_name = 'discussion/discussion_list.html'
     context_object_name = 'discussion'
-    # ordering = ['-date_created']
+    ordering = ['-date_posted']
+
+
+
+class DiscussionDetailView(DetailView):
+    model = Discussion
+    template_name = 'discussion/discussion_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DiscussionDetailView,self).get_context_data(**kwargs)
+        context['each_discussion'] = Each_discussion.objects.all()
+        return context
+
+
+
+class DiscussionCreateView(SuccessMessageMixin, CreateView):
+    model = Discussion
+    template_name = 'discussion/discussion_form.html'
+    fields = ['title', 'content']
+    success_message = "Your discussion has been successfully created."
+    
+    def form_valid(self,form):
+        form.instance.author = self.request.user.developer
+        return super().form_valid(form)
+
+
+
+def add_comment_to_discussion(request,pk):
+        discussion = get_object_or_404(Discussion,pk=pk)
+        if request.method == 'POST':
+            form = CommentCreateForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.post = post
+                comment.commenter = request.user
+                comment.save()
+                
+        else:
+            form =  CommentCreateForm()
+        return render(request,'discussion/comment_success.html',{'form':form})
+
+
+
+
+
+
