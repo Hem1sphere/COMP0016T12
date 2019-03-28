@@ -33,14 +33,24 @@ urlpatterns = [
     path('', include('main.urls')),
     path('challenges/', include('challenges.urls')),
     path('solutions/', include('solutions.urls')),
+    path('discussion/', include('discussion.urls')),
+    path('tutorial/', include('tutorial.urls')),
     path('register/', user_views.RegisterView.as_view(), name='register'),
     path('profile/<username>', user_views.specific_profile, name='specific_profile'),
     path('profile/', user_views.profile, name='profile'),
-    path('testrestricted/', user_views.testrestricted, name='test'),
     path('register/developer/', user_views.DeveloperRegisterView.as_view(), name='developer_register'),
     path('register/clinician/', user_views.ClinicianRegisterView.as_view(), name='clinician_register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('password-reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'),
+         name='password_reset'),
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'),
+         name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name='users/password_reset_confirm.html'),
+         name='password_reset_confirm'),
+    path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
+         name='password_reset_complete'),
 
 ]
 

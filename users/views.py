@@ -6,6 +6,7 @@ from django.contrib import messages
 from challenges.models import Challenge
 from .models import User
 from .forms import DeveloperRegisterForm, ClinicianRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.contrib.messages.views import SuccessMessageMixin
 
 # from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -39,6 +40,7 @@ def profile(request):
         'u_form': u_form,
         'p_form': p_form,
         'interests': interests,
+        'req_user': request.user
     }
     return render(request, 'users/profile.html', context)
 
@@ -56,29 +58,33 @@ class RegisterView(TemplateView):
     template_name = "users/register.html"
 
 
-class DeveloperRegisterView(CreateView):
+class DeveloperRegisterView(SuccessMessageMixin, CreateView):
     model = User
     form_class = DeveloperRegisterForm
     template_name = 'users/registration_form.html'
+    success_message = "Successfully registered!"
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'developer'
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
+        messages.success(self.request, self.success_message)
         user = form.save()
         return redirect('login')
 
 
-class ClinicianRegisterView(CreateView):
+class ClinicianRegisterView(SuccessMessageMixin, CreateView):
     model = User
     form_class = ClinicianRegisterForm
     template_name = 'users/registration_form.html'
+    success_message = "Successfully registered! Please wait for authorisation."
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'clinician'
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
+        messages.success(self.request, self.success_message)
         user = form.save()
         return redirect('login')

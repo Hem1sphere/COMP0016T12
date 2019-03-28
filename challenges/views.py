@@ -1,14 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from .models import Developer
-from .models import Challenge
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-
-# Create your views here.
 from .models import Challenge
 from django.views.generic import (
     ListView,
@@ -54,25 +50,31 @@ class ChallengeMainView(ListView):
     context_object_name = 'challenges'
     ordering = ['-date_created']
 
+
 class ChallengeOverviewView(DetailView):
     model = Challenge
     template_name = 'challenges/challenge_overview.html'
+
 
 class ChallengeDataView(DetailView):
     model = Challenge
     template_name = 'challenges/challenge_data.html'
 
+
 class ChallengeSolutionsView(DetailView):
     model = Challenge
     template_name = 'challenges/challenge_solutions.html'
+
 
 class ChallengeDiscussionView(DetailView):
     model = Challenge
     template_name = 'challenges/challenge_discussion.html'
 
+
 class ChallengeLeaderboardView(DetailView):
     model = Challenge
     template_name = 'challenges/challenge_leaderboard.html'
+
 
 class ChallengeRulesView(DetailView):
     model = Challenge
@@ -101,9 +103,11 @@ class ChallengeUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         challenge = self.get_object()
-        if self.request.user.clinician == challenge.clinician:
-            return True
-        return False
+        try:
+            if self.request.user.clinician == challenge.clinician:
+                return True
+        except AttributeError:
+            return False
 
 
 class ChallengeDeleteView(UserPassesTestMixin, DeleteView):
@@ -117,6 +121,8 @@ class ChallengeDeleteView(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         challenge = self.get_object()
-        if self.request.user.clinician == challenge.clinician:
-            return True
-        return False
+        try:
+            if self.request.user.clinician == challenge.clinician:
+                return True
+        except AttributeError:
+            return False
