@@ -45,6 +45,7 @@ class SolutionMainView(ListView):
     template_name = 'solutions/solution_list.html'
     context_object_name = 'solutions'
     ordering = ['-date_created']
+    paginate_by = 20
 
 
 class SolutionDetailView(DetailView):
