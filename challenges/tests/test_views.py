@@ -5,6 +5,19 @@ from users.models import User, Clinician
 
 
 class ChallengeListViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        # Create 23 challenges for pagination tests
+        number_of_challenges = 24
+
+        for challenge_id in range(number_of_challenges):
+            name = 'testuser' + str(challenge_id)
+            test_user = User.objects.create_user(username=name, password='hello123!', is_clinician=True)
+            test_clinician = Clinician.objects.create(user=test_user)
+            title = "Test Challenge " + str(challenge_id)
+            Challenge.objects.create(title=title, brief="Test Challenge Brief", clinician=test_clinician)
+
+
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get('/challenges/')
         self.assertEqual(response.status_code, 200)
@@ -17,6 +30,21 @@ class ChallengeListViewTest(TestCase):
         response = self.client.get(reverse('challenges_main'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'challenges/challenge_list.html')
+
+    def test_pagination_is_ten(self):
+        response = self.client.get(reverse('challenges_main'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('is_paginated' in response.context)
+        self.assertTrue(response.context['is_paginated'])
+        self.assertEqual(len(response.context['challenges']), 10)
+
+    def test_lists_all_challenges(self):
+        # Get second page and confirm it has (exactly) remaining 3 items
+        response = self.client.get(reverse('challenges_main') + '?page=3')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('is_paginated' in response.context)
+        self.assertTrue(response.context['is_paginated'])
+        self.assertEqual(len(response.context['challenges']), 4)
 
 
 class ChallengeUpdateViewTest(TestCase):

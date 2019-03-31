@@ -17,8 +17,8 @@ from django.views.generic import (
 
 def user_is_participating(challengeid, userid):
     current_challenge = Challenge.objects.get(pk=challengeid)
-    for devs in current_challenge.developers.all():
-        if devs.pk == userid:
+    for developer in current_challenge.developers.all():
+        if developer.pk == userid:
             return True
     return False
 
@@ -44,7 +44,7 @@ class ChallengeMainView(ListView):
     template_name = 'challenges/challenge_list.html'
     context_object_name = 'challenges'
     ordering = ['-date_created']
-    paginate_by = 20
+    paginate_by = 10
 
 
 class ChallengeOverviewView(DetailView):
