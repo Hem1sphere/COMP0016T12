@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'solutions.apps.SolutionsConfig',
     'tutorial.apps.TutorialConfig',
+    'discussion.apps.DiscussionConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'discussion',
     'ckeditor',
     'ckeditor_uploader',
 ]

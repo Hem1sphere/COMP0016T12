@@ -12,8 +12,8 @@ from .views import(
  
 urlpatterns = [
     path('', DiscussionMainView.as_view(), name='discussion_main'),
-    path('<int:pk>/',DiscussionDetailView.as_view(), name='discussion_detail'),
-    path('createDiscussion/', DiscussionCreateView.as_view(), name='discussion_form'),
+    path('<int:pk>/', DiscussionDetailView.as_view(), name='discussion_detail'),
+    path('createDiscussion/', DiscussionCreateView.as_view(), name='discussion_form')
 
 
 ]

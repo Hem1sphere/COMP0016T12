@@ -1,52 +1,51 @@
 {% extends 'main/base.html' %}
 
 <div class="jumbotron">
-  <p class="lead">
-    {% block content %}
+    <p class="lead">
+        {% block content %}
 
-       <div class="col-lg-8 col-md-7 col-sm-6">
-        <h1>Welcome to Discussion</h1>
-       </div>
-      
-      <div class="card mb-2" style="padding:0rem">
-      {% load static %}
-      <img src="{% static "pictures/pic3.jpeg" %}"style="height:15rem">
-      </div>
-      
+            <div class="col-lg-8 col-md-7 col-sm-6">
+                <h1>Welcome to Discussion</h1>
+            </div>
+
+            <div class="card mb-2" style="padding:0rem">
+                {% load static %}
+                <img src="{% static "pictures/pic3.jpeg" %}" style="height:15rem">
+            </div>
 
 
-<div>
+            <div>
+                {% for discussion in discussion %}
 
-    {% for discussion in discussion %}
+                    <div class="card mb-2" style="padding:1rem;">
 
-    <div class="card mb-2" style="padding:1rem;">
-      <div class="card-subtitle">Discussion posted by {{ discussion.author }}</a> on {{ discussion.date_posted }}
-      </div>
+                        <div class="card-subtitle">Discussion created by <a href="
+                            {% if user == discussion.author.user %}
+                                {% url 'profile' %}
+                            {% else %}
+                                {% url 'specific_profile' discussion.author %}
+                            {% endif %}">{{ discussion.author }}</a> on {{ discussion.date_created }}
+                        </div>
 
-      <div class="card-body">
-    
-          {% load static %}
-            <img src="{% static "pictures/pic_qa.png" %}" style="float:left;width:2.3rem;height:1.7rem; margin-right:0.5rem" />
-            
-            <h4> <a class="card-title" href="{% url 'discussion_detail' discussion.id %}">{{ discussion.title }}</a></h4>    
-            
-            <p class="card-text">{{ discussion.content }} </p> 
-      </div>
-    </div>
 
-    {% endfor %}
+                        <div class="card-body">
+                            {% load static %}
+                            <img src="{% static "pictures/pic_qa.png" %}"
+                                 style="float:left;width:2.3rem;height:1.7rem; margin-right:0.5rem"/>
 
+                            <h4><a class="card-title"
+                                   href="{% url 'discussion_detail' discussion.id %}">{{ discussion.title }}</a></h4>
+                            <p class="card-text">{{ discussion.content }} </p>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% if user.is_authenticated %}
+                <a style="text-align: center" class="btn-primary btn-lg btn-block" href="{% url 'discussion_form' %}">Create
+                    Discussion Post</a>
+            {% endif %}
+        {% endblock %}
 </div>
-
-{% comment %} <button type="button" class="btn btn-primary btn-lg btn-block"  href="{% url 'discussion_form'  %}" style="font-size:1rem;margin-top:1.5rem">
-Start My Discussion</button>  {% endcomment %}
-
-<button type="button" class="btn btn-primary btn-lg btn-block"  href="{% url 'discussion_form' %}"  style="font-size:1rem;margin-top:1.5rem">
-Start My Discussion</button>
-
-
-
-  
-
-
-{% endblock %}
