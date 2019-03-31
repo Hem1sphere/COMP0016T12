@@ -1,22 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views.generic import CreateView, TemplateView
 from django.shortcuts import redirect
 from django.contrib import messages
-from challenges.models import Challenge
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.decorators import login_required
+
 from .models import User
 from .forms import DeveloperRegisterForm, ClinicianRegisterForm, UserUpdateForm, ProfileUpdateForm
-from django.contrib.messages.views import SuccessMessageMixin
-
-# from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
-from .decorators import developer_required
-
-
-@login_required
-@developer_required
-def testrestricted(request):
-    return HttpResponse('<h1>test restricted views for developer</h1>')
+from challenges.models import Challenge
 
 
 @login_required
@@ -34,7 +25,7 @@ def profile(request):
         p_form = ProfileUpdateForm(instance=request.user.profile)
     if request.user.is_developer:
         interests = request.user.developer.challenge_set.all()
-    else: #user is clincian
+    else:  # user is clinician
         interests = Challenge.objects.filter(clinician=request.user.clinician)
     context = {
         'u_form': u_form,
@@ -49,7 +40,7 @@ def specific_profile(request, username):
     user = User.objects.get(username=username)
     if user.is_developer:
         interests = user.developer.challenge_set.all()
-    else: #user is clincian
+    else:  # user is clinician
         interests = Challenge.objects.filter(clinician=user.clinician)
     return render(request, 'users/profile.html', {"req_user": user, "interests": interests})
 

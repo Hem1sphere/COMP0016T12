@@ -1,11 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .models import Developer
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from .models import Challenge
+from django.urls import reverse
+
+from .models import Developer, Challenge
 from django.views.generic import (
     ListView,
     DetailView,
@@ -13,12 +13,6 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-
-def createChallenge(request):
-    context = {
-        'challenges': Challenge.objects.all()
-    }
-    return render(request, 'challenges/challenge_list.html', context)
 
 
 def user_is_participating(challengeid, userid):
@@ -28,7 +22,8 @@ def user_is_participating(challengeid, userid):
             return True
     return False
 
-def participateInChallenge(request, challengeid):
+
+def participate_in_challenge(request, challengeid):
     user = Developer.objects.get(user=request.user)
     if not user_is_participating(challengeid, user.pk):
         Challenge.objects.get(pk=challengeid).developers.add(user)
@@ -36,7 +31,7 @@ def participateInChallenge(request, challengeid):
     return HttpResponseRedirect(reverse('challenges_detail', args=[challengeid]))
 
 
-def leaveChallenge(request, challengeid):
+def leave_challenge(request, challengeid):
     user = Developer.objects.get(user=request.user)
     if user_is_participating(challengeid, user.pk):
         Challenge.objects.get(pk = challengeid).developers.remove(user)

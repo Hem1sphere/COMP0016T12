@@ -1,14 +1,11 @@
 {% extends 'main/base.html' %}
-
 {% load crispy_forms_tags %}
 
 {% block content %}
 
-
+    {#    render discussion card#}
     <div class="card mb-2" style="padding: 0.5rem;">
-
         <div class="card-body">
-
             {% load static %}
             <img src="{% static "pictures/pic_qa.png" %}"
                  style="float:left;width:2.3rem;height:1.7rem; margin-right:0.5rem"/>
@@ -19,23 +16,17 @@
             <hr class="featurette-divider">
             {{ object.content }} </p>
         </div>
-
     </div>
 
+    {#    render all comments for this discussion post#}
     {% for comment in comments %}
-
         {% if object.title == comment.discussion.title %}
-
             <div class="card mb-2" style="padding: 0.5rem;">
-
                 <div class="card-subtitle"></div>
-
                 <div class="card-body">
-
                     {% load static %}
                     <img src="{% static "pictures/comment.jpg" %}"
                          style="float:left;width:2.3rem;height:1.7rem; margin-right:0.5rem"/>
-
                     <h5>Comment by<a href="
                             {% if user == comment.commenter %}
                                 {% url 'profile' %}
@@ -43,17 +34,13 @@
                                 {% url 'specific_profile' comment.commenter %}
                             {% endif %}">{{ comment.commenter }}</a> on {{ comment.date_commented }}</h5>
                     <hr class="featurette-divider">
-
                     <div class="card-text" style="padding:0.5rem">{{ comment.content }} </div>
                 </div>
             </div>
-
         {% endif %}
-
     {% endfor %}
 
-
-    {{ form.errors }}
+    {#    comment form section#}
     <div style="padding-top:1rem">
         {% if user.is_admin or user.is_developer %}
             <div class="content-section">
@@ -65,15 +52,7 @@
 
             </div>
 
-            {#        {% else %}#}
-            {#            <legend class="border-bottom mb-4">You are not allowed to add a comment.</legend>#}
         {% endif %}
     </div>
 
-
-
-
-
-
-    </div>
 {% endblock %}

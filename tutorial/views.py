@@ -1,9 +1,5 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.contrib.auth.models import User
 from .models import Tutorial
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.views.generic import (
@@ -15,7 +11,6 @@ from django.views.generic import (
 )
 
 
-# Create your views here.
 class TutorialMainView(ListView):
     model = Tutorial
     template_name = 'tutorial/tutorial_list.html'
