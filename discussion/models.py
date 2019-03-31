@@ -21,18 +21,17 @@ class Discussion(models.Model):
         return f'Discussion: {self.author}'
 
 
-
-class Each_discussion(models.Model):
-    discussion = models.ForeignKey(Discussion,on_delete=models.CASCADE)
+class Comment(models.Model):
+    discussion = models.ForeignKey(Discussion, on_delete=models.CASCADE)
     date_commented = models.DateTimeField(default=timezone.now)
-    comment = models.TextField(default="_")
+    content = models.TextField(default="")
     commenter = models.ForeignKey(Developer, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'Each_discussion: {self.commenter}'
+        return f'Comment by:: {self.commenter}'
 
     def get_discussion_title(self):
-        return f'Each_discussion: {self.discussion.title}'
+        return f'Commented on discussion: {self.discussion.title}'
 
 
 
