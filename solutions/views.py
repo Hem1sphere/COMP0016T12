@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# Create your views here.
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic import (
     ListView,
@@ -9,23 +8,14 @@ from django.views.generic import (
     DeleteView
 )
 from django import forms
-from .models import Solution
-from .models import Challenge
-from challenges.templatetags import template_methods
-from django.http import HttpResponse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-import sys
+from django.conf import settings
 from nbconvert import HTMLExporter
 import nbformat
-from django.conf import settings
 
-
-def solution(request):
-    context = {
-        'solutions': Solution.objects.all()
-    }
-    return render(request, 'solutions/solution_list.html', context)
+from .models import Challenge
+from .models import Solution
 
 
 def notebookconverthtml(nbfile):
@@ -65,6 +55,7 @@ class SolutionForm(forms.ModelForm):
         if challengepk != "BasePage":
             self.fields['challenge'].initial = Challenge.objects.get(pk=challengepk)
 
+
 class SolutionEvaluationForm(forms.ModelForm):
     class Meta:
         model=Solution
@@ -85,8 +76,8 @@ class SolutionCreateView(SuccessMessageMixin, CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(SolutionCreateView, self).get_form_kwargs()
-        kwargs ['user'] = self.request.user
-        kwargs ['challengepk'] = self.kwargs['challengepk']
+        kwargs['user'] = self.request.user
+        kwargs['challengepk'] = self.kwargs['challengepk']
         return kwargs
 
     def form_valid(self, form):

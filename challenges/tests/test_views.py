@@ -7,7 +7,7 @@ from users.models import User, Clinician
 class ChallengeListViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        # Create 23 challenges for pagination tests
+        # Create 24 challenges for pagination tests
         number_of_challenges = 24
 
         for challenge_id in range(number_of_challenges):
@@ -16,7 +16,6 @@ class ChallengeListViewTest(TestCase):
             test_clinician = Clinician.objects.create(user=test_user)
             title = "Test Challenge " + str(challenge_id)
             Challenge.objects.create(title=title, brief="Test Challenge Brief", clinician=test_clinician)
-
 
     def test_view_url_exists_at_desired_location(self):
         response = self.client.get('/challenges/')
@@ -39,7 +38,7 @@ class ChallengeListViewTest(TestCase):
         self.assertEqual(len(response.context['challenges']), 10)
 
     def test_lists_all_challenges(self):
-        # Get second page and confirm it has (exactly) remaining 3 items
+        # Get third page and confirm it has (exactly) remaining 3 items
         response = self.client.get(reverse('challenges_main') + '?page=3')
         self.assertEqual(response.status_code, 200)
         self.assertTrue('is_paginated' in response.context)
