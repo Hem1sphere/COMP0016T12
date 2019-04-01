@@ -16,6 +16,7 @@ class TutorialMainView(ListView):
     template_name = 'tutorial/tutorial_list.html'
     context_object_name = 'tutorials'
     ordering = ['-date_created']
+    paginate_by = 20
 
 
 class TutorialCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
