@@ -98,9 +98,11 @@ class SolutionUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         solution = self.get_object()
-        if self.request.user.developer == solution.developer:
-            return True
-        return False
+        try:
+            if self.request.user.developer == solution.developer:
+                return True
+        except AttributeError:
+            return False
 
 
 class SolutionEvaluateView(UserPassesTestMixin, UpdateView):
@@ -110,9 +112,11 @@ class SolutionEvaluateView(UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         solution = self.get_object()
-        if self.request.user.clinician == solution.challenge.clinician:
-            return True
-        return False
+        try:
+            if self.request.user.clinician == solution.challenge.clinician:
+                return True
+        except AttributeError:
+            return False
 
 
 class SolutionDeleteView(UserPassesTestMixin, DeleteView):
@@ -126,6 +130,8 @@ class SolutionDeleteView(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         solution = self.get_object()
-        if self.request.user.developer == solution.developer:
-            return True
-        return False
+        try:
+            if self.request.user.developer == solution.developer:
+                return True
+        except AttributeError:
+            return False

@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+
 from challenges.models import Challenge
 from users.models import User, Clinician
 
