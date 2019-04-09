@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# Create your views here.
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic import (
     ListView,
@@ -9,19 +8,26 @@ from django.views.generic import (
     DeleteView
 )
 from django import forms
-from .models import Solution
-from .models import Challenge
-from challenges.templatetags import template_methods
-from django.http import HttpResponse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.conf import settings
+from nbconvert import HTMLExporter
+import nbformat
+
+from .models import Challenge
+from .models import Solution
 
 
-def solution(request):
-    context = {
-        'solutions': Solution.objects.all()
-    }
-    return render(request, 'solutions/solution_list.html', context)
+def notebookconverthtml(nbfile):
+    html_exporter = HTMLExporter()
+    nb = nbformat.reads(nbfile.read(), as_version=4)
+    (body, resources) = html_exporter.from_notebook_node(nb)
+    htmlfile = nbfile.name.replace(".ipynb", ".html")
+    html_file_writer = open(settings.MEDIA_ROOT + "/" + htmlfile, 'w')
+    print(settings.MEDIA_ROOT + "/" + htmlfile)
+    html_file_writer.write(body)
+    html_file_writer.close()
+    return htmlfile
 
 
 class SolutionMainView(ListView):
@@ -29,6 +35,7 @@ class SolutionMainView(ListView):
     template_name = 'solutions/solution_list.html'
     context_object_name = 'solutions'
     ordering = ['-date_created']
+    paginate_by = 20
 
 
 class SolutionDetailView(DetailView):
@@ -38,12 +45,15 @@ class SolutionDetailView(DetailView):
 class SolutionForm(forms.ModelForm):
     class Meta:
         model=Solution
-        fields=['title', 'description', 'challenge', 'solution_data']
+        fields=['title', 'description', 'challenge', 'solution_notebook', 'solution_data']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
+        challengepk = kwargs.pop('challengepk')
         super(SolutionForm, self).__init__(*args, **kwargs)
         self.fields['challenge'].queryset = user.developer.challenge_set.all()
+        if challengepk != "BasePage":
+            self.fields['challenge'].initial = Challenge.objects.get(pk=challengepk)
 
 
 class SolutionEvaluationForm(forms.ModelForm):
@@ -66,43 +76,33 @@ class SolutionCreateView(SuccessMessageMixin, CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(SolutionCreateView, self).get_form_kwargs()
-        kwargs ['user'] = self.request.user
+        kwargs['user'] = self.request.user
+        kwargs['challengepk'] = self.kwargs['challengepk']
         return kwargs
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
-        form.save()
+        form.instance.solution_notebook_htmlver = notebookconverthtml(form.instance.solution_notebook)
         return super(SolutionCreateView, self).form_valid(form)
-
-
-class SolutionSpecCreateView(SuccessMessageMixin, CreateView):
-    model = Solution
-    fields = ['title', 'description', 'solution_data']
-    success_message = "The solution has been successfully created."
-
-    def form_valid(self, form):
-        form.instance.developer = self.request.user.developer
-        form.instance.challenge = Challenge.objects.get(pk=self.kwargs['challengepk'])
-        if template_methods.user_is_in_challenge(self.kwargs['challengepk'], self.request.user.developer.id):
-            form.save()
-            return super(SolutionSpecCreateView, self).form_valid(form)
-        else: return HttpResponse('<h1>You have not yet participated in that challenge</h1>')
 
 
 class SolutionUpdateView(SuccessMessageMixin, UserPassesTestMixin, UpdateView):
     model = Solution
-    fields = ['title', 'description', 'solution_data']
+    fields = ['title', 'description', 'solution_notebook', 'solution_data']
     success_message = "The solution has been successfully updated."
 
     def form_valid(self, form):
         form.instance.developer = self.request.user.developer
+        form.instance.solution_notebook_htmlver = notebookconverthtml(form.instance.solution_notebook)
         return super(SolutionUpdateView, self).form_valid(form)
 
     def test_func(self):
         solution = self.get_object()
-        if self.request.user.developer == solution.developer:
-            return True
-        return False
+        try:
+            if self.request.user.developer == solution.developer:
+                return True
+        except AttributeError:
+            return False
 
 
 class SolutionEvaluateView(UserPassesTestMixin, UpdateView):
@@ -112,9 +112,11 @@ class SolutionEvaluateView(UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         solution = self.get_object()
-        if self.request.user.clinician == solution.challenge.clinician:
-            return True
-        return False
+        try:
+            if self.request.user.clinician == solution.challenge.clinician:
+                return True
+        except AttributeError:
+            return False
 
 
 class SolutionDeleteView(UserPassesTestMixin, DeleteView):
@@ -128,6 +130,8 @@ class SolutionDeleteView(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         solution = self.get_object()
-        if self.request.user.developer == solution.developer:
-            return True
-        return False
+        try:
+            if self.request.user.developer == solution.developer:
+                return True
+        except AttributeError:
+            return False

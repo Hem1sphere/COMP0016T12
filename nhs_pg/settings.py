@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'challenges.apps.ChallengesConfig',
     'main.apps.MainConfig',
     'solutions.apps.SolutionsConfig',
+    'tutorial.apps.TutorialConfig',
+    'discussion.apps.DiscussionConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'discussion',
     'ckeditor',
     'ckeditor_uploader',
 ]
@@ -155,3 +156,12 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+
+# Email settings
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'careai.pg@gmail.com'
+EMAIL_HOST_PASSWORD = 'BemaniUser12'
+EMAIL_PORT = 587

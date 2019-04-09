@@ -30,6 +30,7 @@ class ClinicianRegisterForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_clinician = True
+        user.is_active = False
         if commit:
             user.save()
         Clinician.objects.create(user=user)

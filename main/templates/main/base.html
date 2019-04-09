@@ -54,18 +54,21 @@
             <li class="nav-item{% if request.resolver_match.view_name == 'solutions_main' %} active {% endif %}">
                 <a class="nav-link" href="{% url 'solutions_main' %}">Solutions</a>
             </li>
-            {% comment %} <li class="nav-item{% if request.resolver_match.view_name == 'discussion_main' %} active {% endif %}">
+            <li class="nav-item{% if request.resolver_match.view_name == 'discussion_main' %} active {% endif %}">
                 <a class="nav-link" href="{% url 'discussion_main' %}">Discussion</a>
-            </li> {% endcomment %}
+            </li> 
             <li class="nav-item{% if request.resolver_match.view_name == 'tutorial' %} active {% endif %}">
-                <a class="nav-link" href="{% url 'tutorial' %}">Tutorial</a>
+                <a class="nav-link" href="{% url 'tutorial_main' %}">Tutorial</a>
             </li>
         </ul>
         <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+                <a style="margin-right: 5px" class="btn btn-info" href="{% url 'tutorial_create' %}">New Tutorial</a>
+            {% endif %}
             {% if user.is_clinician or user.is_admin %}
                 <a class="btn btn-info" href="{% url 'challenges_create' %}">New Challenge</a>
             {% elif user.is_developer %}
-                <a class="btn btn-info" href="{% url 'solutions_create' %}">New Solution</a>
+                <a class="btn btn-info" href="{% url 'solutions_create' "BasePage" %}">New Solution</a>
             {% endif %}
             {% if user.is_authenticated %}
                 <li class="nav-item{% if request.resolver_match.view_name == 'profile' %} active {% endif %}">

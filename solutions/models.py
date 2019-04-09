@@ -15,7 +15,8 @@ class Solution(models.Model):
     description = RichTextUploadingField()
     accuracy = models.FloatField(default=0.0)
     solution_data = models.FileField()
-    solution_notebook = models.FileField(blank=True)
+    solution_notebook = models.FileField()
+    solution_notebook_htmlver = models.FileField(blank=True)
 
     def __str__(self):
         return f'Solution: {self.title}'

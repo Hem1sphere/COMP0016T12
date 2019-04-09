@@ -1,8 +1,12 @@
-from django.conf.urls import url
-from django.urls import include, path
-
-from . import views
-
+from django.urls import path
+from .views import (
+    DiscussionMainView,
+    DiscussionCreateView,
+    DiscussionDetailView
+)
+ 
 urlpatterns = [
-    path('', views.discussion, name='discussion'),
+    path('', DiscussionMainView.as_view(), name='discussion_main'),
+    path('<int:pk>/', DiscussionDetailView.as_view(), name='discussion_detail'),
+    path('create/', DiscussionCreateView.as_view(), name='discussion_form')
 ]
