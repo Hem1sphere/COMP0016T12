@@ -34,7 +34,7 @@ class DiscussionMainView(ListView):
     template_name = 'discussion/discussion_list.html'
     context_object_name = 'discussion'
     ordering = ['-date_posted']
-    paginate_by = 20
+    paginate_by = 5
 
 
 class DiscussionDetailView(FormMixin, DetailView):

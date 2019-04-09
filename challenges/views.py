@@ -44,7 +44,7 @@ class ChallengeMainView(ListView):
     template_name = 'challenges/challenge_list.html'
     context_object_name = 'challenges'
     ordering = ['-date_created']
-    paginate_by = 10
+    paginate_by = 5
 
 
 class ChallengeOverviewView(DetailView):

@@ -82,10 +82,18 @@ WSGI_APPLICATION = 'nhs_pg.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'sql_server.pyodbc',
+        'HOST': 'nhsplayground.database.windows.net',
+        'NAME': 'nhsplaygrounddatabase',
+        "PORT": '',
+        'USER': 'nhsplayground_admin@nhsplayground',
+        'PASSWORD': 'hello123!',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        }
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
