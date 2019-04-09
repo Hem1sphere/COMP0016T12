@@ -15,7 +15,7 @@ from django.urls import reverse
 from .models import Discussion, Comment
 
 
-# All Forms
+# All Forms t
 class DiscussionCreateForm(forms.ModelForm):
     class Meta:
         model = Discussion
