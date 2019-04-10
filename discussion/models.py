@@ -3,12 +3,12 @@ from django.utils import timezone
 from users.models import Developer, Clinician
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Discussion(models.Model):
     title = models.CharField(max_length=100)
     date_posted = models.DateTimeField(default=timezone.now)
-    content = models.TextField(default="")
+    content = RichTextUploadingField()
     author = models.ForeignKey(Developer, on_delete=models.CASCADE)
     
     def get_absolute_url(self):
