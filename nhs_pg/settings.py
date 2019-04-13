@@ -82,15 +82,8 @@ WSGI_APPLICATION = 'nhs_pg.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'HOST': 'nhsplayground.database.windows.net',
-        'NAME': 'nhsplaygrounddatabase',
-        "PORT": '',
-        'USER': 'nhsplayground_admin@nhsplayground',
-        'PASSWORD': 'hello123!',
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 
