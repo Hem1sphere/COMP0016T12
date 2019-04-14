@@ -4,6 +4,14 @@
 <div class="jumbotron">
     <p class="lead">
         {% block content %}
+
+      {% load static %}
+        <div class="container" style="height:10rem;background-image: url('{% static "pictures/tutorial_bg.jpg"%}')">
+            <h1 style="padding:3.5rem 2rem;color:#E4FCFE" class="display-5" ><strong>Tutorial</strong></h1>
+        </div>
+
+
+
             {% for tutorial in tutorials %}
 
                 <div class="card mb-2" style="padding: 2rem">

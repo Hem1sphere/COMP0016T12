@@ -1,17 +1,15 @@
 {% extends 'main/base.html' %}
 
+
 <div class="jumbotron">
     <p class="lead">
         {% block content %}
 
-            <div class="col-lg-8 col-md-7 col-sm-6">
-                <h1>Welcome to Discussion</h1>
-            </div>
-
-            <div class="card mb-2" style="padding:0rem">
-                {% load static %}
-                <img src="{% static "pictures/pic3.jpeg" %}" style="height:15rem">
-            </div>
+           
+        {% load static %}
+        <div class="container" style="height:10rem;background-image: url('{% static "pictures/pic1.jpg"%}')">
+            <h1 style="padding:3.5rem 2rem;color:#07619E" class="display-5"><strong>Discussion</strong></h1>
+        </div>
 
 
             <div>
