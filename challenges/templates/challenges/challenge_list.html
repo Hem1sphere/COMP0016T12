@@ -14,7 +14,7 @@
 
                 <div class="card mb-2" style="padding: 2rem; flex-direction: row">
                     <div class="container" style="width: 10%; min-width: 100px; padding: 0"><img src="{{ challenge.clinician.user.profile.image.url }}" width="100px" height="100px"> </div>
-                    <div class="container" style="float: right">
+                    <div class="container">
                         <div class="card-subtitle">Challenge created by <a href="
             {% if user == challenge.clinician.user %}
                 {% url 'profile' %}

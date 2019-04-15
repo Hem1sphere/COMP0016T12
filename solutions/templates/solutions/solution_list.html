@@ -6,30 +6,34 @@
         {% block content %}
 
 
-        {% load static %}
-        <div class="container" style="height:10rem;background-image: url('{% static "pictures/solution_bg.jpg"%}')">
-            <h1 style="padding:3.5rem 2rem;color:#ffffff" class="display-5" ><strong>Solutions</strong></h1>
-        </div>
+            {% load static %}
+            <div class="container"
+                 style="height:10rem;background-image: url('{% static "pictures/solution_bg.jpg" %}')">
+                <h1 style="padding:3.5rem 2rem;color:#ffffff" class="display-5"><strong>Solutions</strong></h1>
+            </div>
 
 
 
             {% for solution in solutions %}
 
-                <div class="card mb-2" style="padding: 2rem">
-                    <div class="card-subtitle">Solution created by <a href="
+                <div class="card mb-2" style="padding: 2rem; flex-direction: row">
+                <div class="container" style="width: 10%; min-width: 100px; padding: 0"><img src="{{ solution.developer.user.profile.image.url }}" width="100px" height="100px"> </div>
+                    <div class="container">
+                        <div class="card-subtitle">Solution created by <a href="
             {% if user == solution.developer.user %}
                 {% url 'profile' %}
             {% else %}
                 {% url 'specific_profile' solution.developer %}
             {% endif %}">{{ solution.developer }}</a>
-                        on {{ solution.date_created }} for <a
-                                href="{% url 'challenges_detail' solution.challenge.id %}">{{ solution.challenge.title }}</a>
+                            on {{ solution.date_created }} for <a
+                                    href="{% url 'challenges_detail' solution.challenge.id %}">{{ solution.challenge.title }}</a>
+                        </div>
+                        <div class="card-body" style="padding-left: 0">
+                            <h4><a class="card-title"
+                                   href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a></h4>
+                            <p class="card-text">{{ solution.description|safe }}</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h4><a class="card-title"
-                               href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a></h4>
-                <p class="card-text">{{ solution.description|safe }}</p>
-                </div>
                 </div>
             {% endfor %}
 
@@ -69,5 +73,5 @@
                 </div>
             {% endif %}
         {% endblock %}
-</p>
+    </p>
 </div>
