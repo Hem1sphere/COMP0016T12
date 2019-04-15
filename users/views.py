@@ -25,8 +25,10 @@ def profile(request):
         p_form = ProfileUpdateForm(instance=request.user.profile)
     if request.user.is_developer:
         interests = request.user.developer.challenge_set.all()
-    else:  # user is clinician
+    elif request.user.is_clinician:  # user is clinician
         interests = Challenge.objects.filter(clinician=request.user.clinician)
+    else:
+        interests = None
     context = {
         'u_form': u_form,
         'p_form': p_form,
@@ -40,8 +42,10 @@ def specific_profile(request, username):
     user = User.objects.get(username=username)
     if user.is_developer:
         interests = user.developer.challenge_set.all()
-    else:  # user is clinician
+    elif user.is_clinician:  # user is clinician
         interests = Challenge.objects.filter(clinician=user.clinician)
+    else:
+        interests = None
     return render(request, 'users/profile.html', {"req_user": user, "interests": interests})
 
 
