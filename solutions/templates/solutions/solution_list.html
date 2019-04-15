@@ -17,7 +17,7 @@
             {% for solution in solutions %}
 
                 <div class="card mb-2" style="padding: 2rem; flex-direction: row">
-                <div class="container" style="width: 10%; min-width: 100px; padding: 0"><img src="{{ solution.developer.user.profile.image.url }}" width="100px" height="100px"> </div>
+                <div style="width: 10%; min-width: 100px;"><img src="{{ solution.developer.user.profile.image.url }}" width="100px" height="100px"> </div>
                     <div class="container">
                         <div class="card-subtitle">Solution created by <a href="
             {% if user == solution.developer.user %}
