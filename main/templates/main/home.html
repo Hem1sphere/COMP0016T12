@@ -1,4 +1,22 @@
-{% extends 'main/base.html' %} 
+{% extends 'main/base.html' %}
+
+{% block banner %}
+{#    {% load static %}#}
+{#  <div style="background-image: url('{% static "pic/sky.jpg"%}')">#}
+{#    <div class="container">#}
+{#      <h1 class="display-3" style="color:#1A6FA8"><strong>Hello, {{ user }}</strong></h1>#}
+{#      <br>#}
+{#      <h2 class="display-6" style="color:#014B7C">Welcome to CareAI PlayGround, solve challenges and have fun!</h2>#}
+{#      <br>#}
+{##}
+{#    </div>#}
+{#  </div>#}
+        {% load static %}
+    <div class="container"
+         style="max-height:170px;margin-bottom:2rem;max-width:10000px;height:10rem;background-image: url('{% static "pic/sky.jpg" %}')">
+        <h2 style="padding:3.5rem 3.5rem;color:#014B7C" class="display-5"><strong>CareAI PlayGround: a platform for AI challenges</strong></h2>
+    </div>
+{% endblock %}
 
 {% block content %}
 <!-- <div class="col-lg-8 col-md-7 col-sm-6">
@@ -7,16 +25,7 @@
     </div> -->
 
 
-{% load static %}
-  <div class="jumbotron" style="background-image: url('{% static "pic/sky.jpg"%}')"> 
-    <div class="container">
-{#      <h1 class="display-3" style="color:#1A6FA8"><strong>Hello, {{ user }}</strong></h1>#}
-      <br>
-      <h2 class="display-6" style="color:#014B7C">Welcome to CareAI PlayGround, solve challenges and have fun!</h2>
-      <br>
-      
-    </div>
-  </div>
+
 
 <div class="row featurette" style="padding:2rem 0">
       <div class="col-md-5">
