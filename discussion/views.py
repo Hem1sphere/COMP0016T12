@@ -30,9 +30,14 @@ class CommentCreateForm(forms.ModelForm):
 
 # All Views
 class DiscussionMainView(ListView):
+    def get_context_data(self, **kwargs):
+        context = super(DiscussionMainView, self).get_context_data(**kwargs)
+        context['comments'] = Comment.objects.all()
+        return context
+
     model = Discussion
     template_name = 'discussion/discussion_list.html'
-    context_object_name = 'discussion'
+    context_object_name = 'discussions'
     ordering = ['-date_posted']
     paginate_by = 5
 
