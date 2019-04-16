@@ -7,7 +7,7 @@
         <div class="card-body row">
             <div class="col-md-9">
                 <h1>{{ object.title }}</h1>
-            <p>{{ object.brief }}</p>
+                <p>{{ object.brief }}</p>
                 <p class="lead">Created by <a href="
                 {% if user == object.clinician.user %}
                     {% url 'profile' %}
@@ -17,7 +17,11 @@
                 </p>
             </div>
             <div class="col-md-3" style="float: right">
-                <div>{{ object.award|safe }}</div>
+                <div style="flex-direction: column;">
+                    <h5>Target Cost Saving</h5>
+                    <h4>£{{ challenge.award|safe }}</h4>
+                    <h6>{{ challenge.developers.all.count }} team(s)</h6>
+                </div>
             </div>
         </div>
     </div>
@@ -28,8 +32,6 @@
             <li class="masterdetail"><a href="{% url 'challenges_overview' object.pk %}">Overview</a></li>
             <li class="masterdetail"><a href="{% url 'challenges_data' object.pk %}">Data</a></li>
             <li class="masterdetail"><a href="{% url 'challenges_solutions' object.pk %}">Solutions</a></li>
-            <li class="masterdetail"><a href="{% url 'challenges_discussion' object.pk %}">Discussion</a></li>
-            <li class="masterdetail"><a href="{% url 'challenges_leaderboard' object.pk %}">Leaderboard</a></li>
             <li class="masterdetail"><a href="{% url 'challenges_rules' object.pk %}">Rules</a></li>
             {% if user.is_developer %}
                 {% user_is_in_challenge object.pk user.developer.pk as userParticipation %}
