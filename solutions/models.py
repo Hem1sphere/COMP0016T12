@@ -12,10 +12,10 @@ class Solution(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     developer = models.ForeignKey(Developer, on_delete=models.CASCADE, related_name="creator")  # person who solved the person
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)  # challenge the solution is targeting
-    description = RichTextUploadingField()
+    description = RichTextUploadingField(blank=True)
     accuracy = models.FloatField(default=0.0)
     solution_data = models.FileField()
-    solution_notebook = models.FileField()
+    solution_notebook = models.FileField(blank=True)
     solution_notebook_htmlver = models.FileField(blank=True)
 
     def __str__(self):

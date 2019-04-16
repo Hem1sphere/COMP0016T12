@@ -7,8 +7,6 @@ from .views import (
     ChallengeDeleteView,
     ChallengeOverviewView,
     ChallengeDataView,
-    ChallengeDiscussionView,
-    ChallengeLeaderboardView,
     ChallengeRulesView,
     ChallengeSolutionsView
 )
@@ -24,8 +22,6 @@ urlpatterns = [
     path('<int:pk>/overview', ChallengeOverviewView.as_view(), name='challenges_overview'),
     path('<int:pk>/data', ChallengeDataView.as_view(), name='challenges_data'),
     path('<int:pk>/solutions', ChallengeSolutionsView.as_view(), name='challenges_solutions'),
-    path('<int:pk>/discussion', ChallengeDiscussionView.as_view(), name='challenges_discussion'),
-    path('<int:pk>/leaderboard', ChallengeLeaderboardView.as_view(), name='challenges_leaderboard'),
     path('<int:pk>/rules', ChallengeRulesView.as_view(), name='challenges_rules')
 
 ]
