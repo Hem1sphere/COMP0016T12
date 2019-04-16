@@ -2,7 +2,8 @@
 
 {% block banner %}
     {% load static %}
-    <div class="container" style="max-height:100px;margin-bottom:2rem;max-width:10000px;height:10rem;background-image: url('{% static "pictures/tutorial_bg.jpg" %}')">
+    <div class="container"
+         style="max-height:100px;margin-bottom:2rem;max-width:10000px;height:10rem;background-image: url('{% static "pictures/tutorial_bg.jpg" %}')">
         <h1 style="padding:2rem 3.5rem;color:#E4FCFE" class="display-5"><strong>Tutorial</strong></h1>
     </div>
 {% endblock %}
@@ -11,17 +12,21 @@
 
     {% for tutorial in tutorials %}
 
-        <div class="card mb-2" style="padding: 2rem">
-            <div class="card-subtitle">Tutorial created by <a href="
+        <div class="card mb-2" style="padding: 2rem; flex-direction: row">
+            <div style="width: 10%; min-width: 100px;"><img
+                    src="{{ tutorial.creator.profile.image.url }}" width="100px" height="100px"></div>
+            <div class="container">
+                <div class="card-subtitle">Tutorial created by <a href="
             {% if user == tutorial.creator %}
                 {% url 'profile' %}
             {% else %}
                 {% url 'specific_profile' tutorial.creator %}
             {% endif %}">{{ tutorial.creator }}</a> on {{ tutorial.date_created }}</div>
-            <div class="card-body">
-                <h4><a class="card-title"
-                       href="{% url 'tutorial_detail' tutorial.id %}">{{ tutorial.title }}</a></h4>
-                <p class="card-text">{{ challenge.brief }}</p>
+                <div class="card-body" style="padding-left: 0">
+                    <h4><a class="card-title"
+                           href="{% url 'tutorial_detail' tutorial.id %}">{{ tutorial.title }}</a></h4>
+                    <p class="card-text">{{ challenge.brief }}</p>
+                </div>
             </div>
         </div>
     {% endfor %}
