@@ -13,7 +13,7 @@ class Challenge(models.Model):
     brief = models.CharField(max_length=200, default="")
     date_created = models.DateTimeField(default=timezone.now)
     # award = RichTextUploadingField(blank=True)
-    award = models.IntegerField(verbose_name= ('Award in GBP'), default=0, blank=True, validators=[MaxValueValidator(1000000000)])
+    award = models.IntegerField(verbose_name= ('Target cost saving in GBP'), default=0, blank=True, validators=[MaxValueValidator(1000000000)])
     clinician = models.ForeignKey(Clinician, on_delete=models.CASCADE, related_name="creator")  # clinician who created the challenge
     developers = models.ManyToManyField(Developer, blank=True)  # developerS who indicated interest
     description = RichTextUploadingField(blank=True)
