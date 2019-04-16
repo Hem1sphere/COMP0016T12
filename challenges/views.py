@@ -62,16 +62,6 @@ class ChallengeSolutionsView(DetailView):
     template_name = 'challenges/challenge_solutions.html'
 
 
-class ChallengeDiscussionView(DetailView):
-    model = Challenge
-    template_name = 'challenges/challenge_discussion.html'
-
-
-class ChallengeLeaderboardView(DetailView):
-    model = Challenge
-    template_name = 'challenges/challenge_leaderboard.html'
-
-
 class ChallengeRulesView(DetailView):
     model = Challenge
     template_name = 'challenges/challenge_rules.html'
