@@ -3,6 +3,7 @@ from django.utils import timezone
 from users.models import Developer, Clinician
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
@@ -11,8 +12,8 @@ class Challenge(models.Model):
     title = models.CharField(max_length=100)
     brief = models.CharField(max_length=200, default="")
     date_created = models.DateTimeField(default=timezone.now)
-    award = RichTextUploadingField(blank=True)
-    # award = models.DecimalField(verbose_name= ('Award in GBP'), max_digits=10, decimal_places=2, default=0)
+    # award = RichTextUploadingField(blank=True)
+    award = models.IntegerField(verbose_name= ('Award in GBP'), default=0, blank=True, validators=[MaxValueValidator(1000000000)])
     clinician = models.ForeignKey(Clinician, on_delete=models.CASCADE, related_name="creator")  # clinician who created the challenge
     developers = models.ManyToManyField(Developer, blank=True)  # developerS who indicated interest
     description = RichTextUploadingField(blank=True)
