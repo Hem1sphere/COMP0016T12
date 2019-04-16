@@ -1,77 +1,74 @@
 {% extends 'main/base.html' %}
 
 
-<div class="jumbotron">
-    <p class="lead">
-        {% block content %}
+{% block content %}
 
 
-            {% load static %}
-            <div class="container"
-                 style="height:10rem;background-image: url('{% static "pictures/solution_bg.jpg" %}')">
-                <h1 style="padding:3.5rem 2rem;color:#ffffff" class="display-5"><strong>Solutions</strong></h1>
-            </div>
+    {% load static %}
+    <div class="container"
+         style="height:10rem;background-image: url('{% static "pictures/solution_bg.jpg" %}')">
+        <h1 style="padding:3.5rem 2rem;color:#ffffff" class="display-5"><strong>Solutions</strong></h1>
+    </div>
 
 
 
-            {% for solution in solutions %}
+    {% for solution in solutions %}
 
-                <div class="card mb-2" style="padding: 2rem; flex-direction: row">
-                <div style="width: 10%; min-width: 100px;"><img src="{{ solution.developer.user.profile.image.url }}" width="100px" height="100px"> </div>
-                    <div class="container">
-                        <div class="card-subtitle">Solution created by <a href="
+        <div class="card mb-2" style="padding: 2rem; flex-direction: row">
+            <div style="width: 10%; min-width: 100px;"><img src="{{ solution.developer.user.profile.image.url }}"
+                                                            width="100px" height="100px"></div>
+            <div class="container">
+                <div class="card-subtitle">Solution created by <a href="
             {% if user == solution.developer.user %}
                 {% url 'profile' %}
             {% else %}
                 {% url 'specific_profile' solution.developer %}
             {% endif %}">{{ solution.developer }}</a>
-                            on {{ solution.date_created }} for <a
-                                    href="{% url 'challenges_detail' solution.challenge.id %}">{{ solution.challenge.title }}</a>
-                        </div>
-                        <div class="card-body" style="padding-left: 0">
-                            <h4><a class="card-title"
-                                   href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a></h4>
-                            <p class="card-text">{{ solution.description|safe }}</p>
-                        </div>
-                    </div>
+                    on {{ solution.date_created }} for <a
+                            href="{% url 'challenges_detail' solution.challenge.id %}">{{ solution.challenge.title }}</a>
                 </div>
-            {% endfor %}
-
-            {% if is_paginated %}
-                <div>
-                    <ul class="pagination">
-                        {% if page_obj.has_previous %}
-
-                            <li class="page-item">
-                                <a class="page-link" href="?page=1">&laquo;</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
-                            </li>
-                        {% endif %}
-                        {% for num in page_obj.paginator.page_range %}
-                            {% if page_obj.number == num %}
-                                <li class="page-item active">
-                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                                </li>
-                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                        {% if page_obj.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">&gt;</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
-                            </li>
-
-                        {% endif %}
-                    </ul>
+                <div class="card-body" style="padding-left: 0">
+                    <h4><a class="card-title"
+                           href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a></h4>
+                    <p class="card-text">{{ solution.description|safe }}</p>
                 </div>
-            {% endif %}
-        {% endblock %}
-    </p>
-</div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if is_paginated %}
+        <div>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo;</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                    </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
