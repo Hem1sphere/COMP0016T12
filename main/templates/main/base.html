@@ -36,7 +36,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="margin-bottom: 2rem;border-color: #ffffff;background-color:#0E5F94;">
+<nav class="navbar navbar-expand-lg navbar-dark" style="border-color: #0E5F94;background-color:#0E5F94;">
     {% load static %}
     <a class="navbar-brand"  style="color:#A7DCFE" href="{% url 'main-page' %}" style="font-size:16px">
     <img src="{% static "pic/cloud.png" %}"
@@ -88,7 +88,11 @@
 </nav>
 
 
+{% block banner %}{% endblock %}
+{#<p style="margin-top:0;background-color: red">TEST</p>#}
+
 <main role="main" class="container" style="min-height: 100vh">
+
     <div class="row">
         <div class="col-md-12">
             {% if messages %}
