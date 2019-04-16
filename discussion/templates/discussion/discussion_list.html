@@ -2,7 +2,8 @@
 
 {% block banner %}
     {% load static %}
-    <div class="container" style="max-height:100px;margin-bottom:2rem;max-width:10000px;height:10rem;background-image: url('{% static "pictures/pic1.jpg" %}')">
+    <div class="container"
+         style="max-height:100px;margin-bottom:2rem;max-width:10000px;height:10rem;background-image: url('{% static "pictures/pic1.jpg" %}')">
         <h1 style="padding:2rem 3.5rem;color:#07619E" class="display-5"><strong>Discussion</strong></h1>
     </div>
 {% endblock %}
@@ -10,18 +11,30 @@
 {% block content %}
 
     <div>
-        {% for discussion in discussion %}
+        {% for discussion in discussions %}
 
             <div class="card mb-2" style="padding:1rem;">
 
-                <div class="card-subtitle">Discussion created by <a href="
+                <div style="display: flex;flex-direction: row">
+                    <div class="container">Discussion created by <a href="
                             {% if user == discussion.author.user %}
                                 {% url 'profile' %}
                             {% else %}
                                 {% url 'specific_profile' discussion.author %}
-                            {% endif %}">{{ discussion.author }}</a> on {{ discussion.date_created }}
-                </div>
+                            {% endif %}">{{ discussion.author }}</a> on {{ discussion.date_posted }}
+                    </div>
 
+                    <div style="width: 10%">
+                        {% for comment in comments %}
+                            {% if comment.discussion.title == discussion.title %}
+                                {% if forloop.last %}
+                                    {{ forloop.counter }} comments
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
 
                 <div class="card-body">
                     {% load static %}
@@ -32,6 +45,7 @@
                            href="{% url 'discussion_detail' discussion.id %}">{{ discussion.title }}</a></h4>
                     <p class="card-text">{{ discussion.content }} </p>
                 </div>
+
             </div>
 
         {% endfor %}
