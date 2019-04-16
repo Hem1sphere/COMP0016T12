@@ -31,7 +31,8 @@
                 <div class="card-body" style="padding-left: 0">
                     <h4><a class="card-title"
                            href="{% url 'solutions_detail' solution.id %}">{{ solution.title }}</a></h4>
-                    <p class="card-text">{{ solution.description|safe }}</p>
+                    <h5 class="card-text">{{ solution.description|safe }}</h5>
+
                 </div>
             </div>
         </div>
