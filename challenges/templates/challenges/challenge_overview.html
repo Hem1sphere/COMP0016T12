@@ -9,7 +9,7 @@
             <li class="nav-item"><a data-toggle="tab" class="nav-link show active" href="#description">Description</a>
             </li>
             <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#evaluation">Evaluation</a></li>
-            <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#prize">Prize</a></li>
+{#            <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#costsaving">Target saving</a></li>#}
             <li class="nav-item"><a data-toggle="tab" class="nav-link show" href="#timeline">Timeline</a></li>
         </ul>
 
@@ -24,9 +24,9 @@
                 {{ object.evaluation|safe }}
             </div>
 
-            <div id="prize" class="tab-pane fade">
-                {{ object.award|safe }}
-            </div>
+{#            <div id="costsaving" class="tab-pane fade">#}
+{#                {{ object.award|safe }}#}
+{#            </div>#}
 
             <div id="timeline" class="tab-pane fade">
                 {{ object.timeline|safe }}
