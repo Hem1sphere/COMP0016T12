@@ -89,7 +89,7 @@
     {% endif %}
 
     <br>
-    {% if user.is_authenticated %}
+    {% if user.is_developer %}
         <a style="text-align: center" class="btn-primary btn-lg btn-block" href="{% url 'discussion_form' %}">Create
             Discussion Post</a>
     {% endif %}
