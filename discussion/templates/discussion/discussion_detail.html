@@ -14,7 +14,7 @@
 
             <p class="card-text"> Posted by {{ object.author }} on {{ object.date_posted }}
             <hr class="featurette-divider">
-            {{ object.content }} </p>
+            {{ object.content|safe }} </p>
         </div>
     </div>
 
