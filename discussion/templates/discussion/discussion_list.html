@@ -43,7 +43,7 @@
 
                     <h4><a class="card-title"
                            href="{% url 'discussion_detail' discussion.id %}">{{ discussion.title }}</a></h4>
-                    <p class="card-text">{{ discussion.content }} </p>
+                    <p class="card-text">{{ discussion.content|safe }} </p>
                 </div>
 
             </div>
@@ -89,7 +89,7 @@
     {% endif %}
 
     <br>
-    {% if user.is_authenticated %}
+    {% if user.is_developer %}
         <a style="text-align: center" class="btn-primary btn-lg btn-block" href="{% url 'discussion_form' %}">Create
             Discussion Post</a>
     {% endif %}
