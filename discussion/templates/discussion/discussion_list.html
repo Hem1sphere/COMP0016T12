@@ -43,7 +43,7 @@
 
                     <h4><a class="card-title"
                            href="{% url 'discussion_detail' discussion.id %}">{{ discussion.title }}</a></h4>
-                    <p class="card-text">{{ discussion.content }} </p>
+                    <p class="card-text">{{ discussion.content|safe }} </p>
                 </div>
 
             </div>
