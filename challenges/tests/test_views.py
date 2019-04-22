@@ -8,8 +8,8 @@ from users.models import User, Clinician
 class ChallengeListViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        # Create 24 challenges for pagination tests
-        number_of_challenges = 24
+        # Create 13 challenges for pagination tests
+        number_of_challenges = 13
 
         for challenge_id in range(number_of_challenges):
             name = 'testuser' + str(challenge_id)
@@ -36,7 +36,7 @@ class ChallengeListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue('is_paginated' in response.context)
         self.assertTrue(response.context['is_paginated'])
-        self.assertEqual(len(response.context['challenges']), 10)
+        self.assertEqual(len(response.context['challenges']), 5)
 
     def test_lists_all_challenges(self):
         # Get third page and confirm it has (exactly) remaining 3 items
@@ -44,7 +44,7 @@ class ChallengeListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue('is_paginated' in response.context)
         self.assertTrue(response.context['is_paginated'])
-        self.assertEqual(len(response.context['challenges']), 4)
+        self.assertEqual(len(response.context['challenges']), 3)
 
 
 class ChallengeUpdateViewTest(TestCase):
@@ -90,7 +90,7 @@ class ChallengeUpdateViewTest(TestCase):
         response = self.client.post(reverse("challenges_update", kwargs={"pk": 1}), {
             "title": "Revised Challenge",  # necessary to populate the whole form for a successful post
             "brief": "Revised Brief",
-            "award": "test",
+            "award": 70,
             "description": "test",
             "evaluation": "test",
             "timeline": "test",
